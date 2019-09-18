@@ -41,9 +41,12 @@ app.get('/num_connections', function(request, response) {
 
 var numConnections = 0;
 
+connections = {};
+
 io.on('connection', function(socket){
   numConnections++;
   console.log('user connected :)');
+  
   socket.on('disconnect', function(){
     numConnections--;
     console.log('user disconnected  :(');
