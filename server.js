@@ -4,13 +4,15 @@
 // init project
 const express = require('express');
 const app = express();
-const http = require('http').createServer(app);
+const server = require('http').createServer(app);
 
 // socket.io
-const io = require('socket.io')(http);
+const io = require('socket.io')(server);
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+// listen for requests :)
+const listener = server.listen(process.env.PORT || 3000, function() {
+  console.log('Your app is listening on port ' + listener.address().port);
+});
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -27,6 +29,9 @@ app.get('/editor', function(request, response) {
 app.get('/concert', function(request, response) {
   response.sendFile(__dirname + '/views/concert.html');
 })
+app.get('/htmleditor', function(request, response) {
+  response.sendFile(__dirname + '/htmleditor/index.html');
+})
 
 io.on('connection', function(socket){
   console.log('a user connected  :)');
@@ -35,7 +40,3 @@ io.on('connection', function(socket){
   });
 });
 
-// listen for requests :)
-const listener = http.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
