@@ -1,7 +1,7 @@
-HI THIS IS CARL
+HI THIS IS CAuRL
 =================
 
-CARL stands for Code ah Augmented Reality Live
+CAuRL stands for Code Augmented Reality Live
 
 -------------------
 

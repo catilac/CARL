@@ -7,7 +7,7 @@ const app = express();
 const http = require('http').createServer(app);
 
 // socket.io
-const io = require('socket')(http);
+const io = require('socket.io')(http);
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -31,4 +31,11 @@ app.get('/concert', function(request, response) {
 // listen for requests :)
 const listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
+});
+
+io.on('connection', function(socket){
+  console.log('a user connected  :)');
+  socket.on('disconnect', function(){
+    console.log('user disconnected  :(');
+  });
 });
