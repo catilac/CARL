@@ -31,7 +31,7 @@ app.get('/concert', function(request, response) {
 });
 
 app.get('/htmleditor', function(request, response) {
-  response.sendFile(__dirname + '/htmleditor/index.html');
+  response.sendFile(__dirname + '/public/htmleditor/index.html');
 });
 
 // DEBUG ROUTE
@@ -43,9 +43,15 @@ var numConnections = 0;
 
 io.on('connection', function(socket){
   numConnections++;
+  console.log('user connected :)');
   socket.on('disconnect', function(){
     numConnections--;
     console.log('user disconnected  :(');
   });
+  
+  /* TODO
+    1. user makes some changes to the editor
+    2. we need to be able to tell who is connected
+  */
 });
 
