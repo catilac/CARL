@@ -30,9 +30,9 @@ app.get('/concert', function(request, response) {
   response.sendFile(__dirname + '/views/concert.html');
 });
 
-app.get('/htmleditor', function(request, response) {
-  response.sendFile(__dirname + '/public/htmleditor/index.html');
-});
+// app.get('/htmleditor', function(request, response) {
+//   response.sendFile(__dirname + '/public/htmleditor/index.html');
+// });
 
 // DEBUG ROUTE
 app.get('/num_connections', function(request, response) {
@@ -41,7 +41,7 @@ app.get('/num_connections', function(request, response) {
 
 var numConnections = 0;
 
-connections = {};
+const connections = {};
 
 io.on('connection', function(socket){
   numConnections++;
