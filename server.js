@@ -44,8 +44,11 @@ var numConnections = 0;
 const connections = {};
 
 io.on('connection', function(socket){
-  numConnections++;
-  console.log('user connected :)');
+  socket.on('added user', function(username) {
+    // lets not worry about unique usernames...
+    connections[username] = { code: '' };
+    numConnections++;
+  });
   
   socket.on('disconnect', function(){
     numConnections--;
@@ -57,4 +60,3 @@ io.on('connection', function(socket){
     2. we need to be able to tell who is connected
   */
 });
-
