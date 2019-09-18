@@ -28,14 +28,23 @@ app.get('/editor', function(request, response) {
 
 app.get('/concert', function(request, response) {
   response.sendFile(__dirname + '/views/concert.html');
-})
+});
+
 app.get('/htmleditor', function(request, response) {
   response.sendFile(__dirname + '/htmleditor/index.html');
+});
+
+// DEBUG ROUTE
+app.get('/num_connections', function(request, response) {
+  response.send({numConnections});
 })
 
+var numConnections = 0;
+
 io.on('connection', function(socket){
-  console.log('a user connected  :)');
+  numConnections++;
   socket.on('disconnect', function(){
+    numConnections--;
     console.log('user disconnected  :(');
   });
 });
