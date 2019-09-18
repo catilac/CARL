@@ -14,6 +14,6 @@
 [🕸] Update the shader when a live coder makes a change <br />
 
 # LEGEND
-[🕸] - not started
-[🎃] - in progress
-[🌝] - done
+[🕸] - not started <br />
+[🎃] - in progress <br />
+[🌝] - done <br />

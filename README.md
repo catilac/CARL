@@ -1,8 +1,7 @@
 HI THIS IS CARL
 =================
 
-CARL stands for Code Augmented Reality Live
-
+CARL stands for Code ah Augmented Reality Live
 
 -------------------
 
