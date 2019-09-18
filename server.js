@@ -28,14 +28,14 @@ app.get('/concert', function(request, response) {
   response.sendFile(__dirname + '/views/concert.html');
 })
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
-
 io.on('connection', function(socket){
   console.log('a user connected  :)');
   socket.on('disconnect', function(){
     console.log('user disconnected  :(');
   });
+});
+
+// listen for requests :)
+const listener = http.listen(process.env.PORT, function() {
+  console.log('Your app is listening on port ' + listener.address().port);
 });
