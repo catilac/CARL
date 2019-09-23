@@ -36,7 +36,7 @@ app.get('/concert', function(request, response) {
 
 // DEBUG ROUTE
 app.get('/num_connections', function(request, response) {
-  response.send({numConnections: Object.keys(connections).length});
+  response.send({numConnections: Object.keys(connections)});
 })
 
 const connections = {};
