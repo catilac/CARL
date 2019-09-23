@@ -5,6 +5,12 @@ console.log('hello world :o)');
 
 const socket = io();
 
+socket.on('message', function(msg) {
+  console.log(msg.code);
+  window.localStorage.setItem('caurlUID', msg.code);
+  sendToEditor();
+});
+
 let submitButton = document.getElementById('register-button');
 if (submitButton) {
   submitButton.addEventListener("click", function() { 
@@ -15,15 +21,12 @@ if (submitButton) {
     if (userhandle) {
       // register with server
       socket.emit('added user', userhandle);
-      hideFormAndDisplayEditor();
     }
   });
 }
 
-
 // helpers
 
-function hideFormAndDisplayEditor() {
-  document.getElementById('registration').classList.add('hidden');
-  document.getElementById('editor').classList.remove('hidden');
+function sendToEditor() {
+  window.location = '/htmleditor';
 }

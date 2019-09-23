@@ -46,7 +46,8 @@ io.on('connection', function(socket){
   socket.on('added user', function(username) {
     // lets not worry about unique usernames...
     console.log(`added user:  ${username}`)
-    connections[username] = { code: + new Date() };
+    connections[username] = { code: username + (+ new Date()) };
+    socket.send(connections[username]);
     
   });
   
@@ -54,8 +55,4 @@ io.on('connection', function(socket){
     console.log('user disconnected  :(');
   });
   
-  /* TODO
-    1. user makes some changes to the editor
-    2. we need to be able to tell who is connected
-  */
 });

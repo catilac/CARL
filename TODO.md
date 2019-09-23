@@ -13,6 +13,10 @@
 ### Chirag
 [🌝] Create a way to have multiple live coders <br />
 [🎃] Update the shader when a live coder makes a change <br />
+  - Send back a UID to user
+  - Save UID in localstorage
+  - Send User to htmleditor/
+  - Find username based on uid or, like, that might not actually be necessary
 
 # LEGEND
 [🕸] - not started <br />
