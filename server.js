@@ -46,7 +46,7 @@ io.on('connection', function(socket){
   socket.on('added user', function(username) {
     // lets not worry about unique usernames...
     console.log(`added user:  ${username}`)
-    connections[username] = { code: '' };
+    connections[username] = { code: + new Date() };
     
   });
   
