@@ -4,9 +4,17 @@
 console.log('hello world :o)');
 
 const socket = io();
-socket.emit('added user', "test_username");
 
 let submitButton = document.getElementById('register-button');
 if (submitButton) {
-  submitButton.addEventListener("submit", function() { alert('hello') });
+  submitButton.addEventListener("click", function() { 
+    // get userhandle value
+    const fieldElem = document.getElementById('userhandle-field');
+    const userhandle = fieldElem.value;
+    
+    if (userhandle) {
+      // register with server
+      socket.emit('added user', userhandle);
+    }
+  });
 }
