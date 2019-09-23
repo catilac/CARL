@@ -15,6 +15,15 @@ if (submitButton) {
     if (userhandle) {
       // register with server
       socket.emit('added user', userhandle);
+      hideFormAndDisplayEditor();
     }
   });
+}
+
+
+// helpers
+
+function hideFormAndDisplayEditor() {
+  document.getElementById('registration').classList.add('hidden');
+  document.getElementById('editor').classList.remove('hidden');
 }

@@ -69,3 +69,9 @@ footer {
   padding-top: 25px;
   border-top: 1px solid lightgrey;
 }
+
+.hidden {
+  display: none;
+}
+
+#editor { background-color: red; }
