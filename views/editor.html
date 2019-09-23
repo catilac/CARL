@@ -1,6 +1,9 @@
 <html>
   <head>
     <title>👵</title>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
   </head>
   
   <body>
@@ -8,10 +11,15 @@
       Hello, young person! I am the editor!
     </h1>
     
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io();
-      socket.emit('added user', "test_username");
-    </script>
+    <div class="registration">
+      <h2>
+        What is your handle, whippersnapper?
+      </h2>
+      <input type="text" />
+      <button>
+        SUBMIT BUTTON
+      </button>
+    </div>
+ 
   </body>
 </html>

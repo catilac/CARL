@@ -36,10 +36,8 @@ app.get('/concert', function(request, response) {
 
 // DEBUG ROUTE
 app.get('/num_connections', function(request, response) {
-  response.send({numConnections});
+  response.send({numConnections: Object.keys(connections).length});
 })
-
-var numConnections = 0;
 
 const connections = {};
 
@@ -49,12 +47,10 @@ io.on('connection', function(socket){
     // lets not worry about unique usernames...
     console.log(`added user:  ${username}`)
     connections[username] = { code: '' };
-    numConnections++;
     
   });
   
   socket.on('disconnect', function(){
-    numConnections--;
     console.log('user disconnected  :(');
   });
   
