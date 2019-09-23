@@ -2,8 +2,6 @@
   <head>
     <title>👵</title>
     
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="client.js"></script>
   </head>
   
   <body>
@@ -15,11 +13,13 @@
       <h2>
         What is your handle, whippersnapper?
       </h2>
-      <input type="text" />
-      <button>
+      <input type="text" id="userhandle-field"/>
+      <button id="register-button">
         SUBMIT BUTTON
       </button>
     </div>
  
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
   </body>
 </html>
