@@ -30,10 +30,6 @@ app.get('/concert', function(request, response) {
   response.sendFile(__dirname + '/views/concert.html');
 });
 
-// app.get('/htmleditor', function(request, response) {
-//   response.sendFile(__dirname + '/public/htmleditor/index.html');
-// });
-
 // DEBUG ROUTE
 app.get('/num_connections', function(request, response) {
   response.send({numConnections: Object.keys(connections)});
@@ -46,13 +42,18 @@ io.on('connection', function(socket){
   socket.on('added user', function(username) {
     // lets not worry about unique usernames...
     console.log(`added user:  ${username}`)
-    connections[username] = { code: username + (+ new Date()) };
-    socket.send(connections[username]);
+    const guid = username + (+ new Date());
+    connections[guid] = { guid };
+    socket.send(connections[guid]);
     
   });
   
+  socket.on('livecode-enter', function(guid) {
+    console.log('livecode-enter + ', guid);
+  })
+  
   socket.on('disconnect', function(){
-    console.log('user disconnected  :(');
+    //
   });
   
 });

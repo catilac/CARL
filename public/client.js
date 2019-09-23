@@ -6,8 +6,8 @@ console.log('hello world :o)');
 const socket = io();
 
 socket.on('message', function(msg) {
-  console.log(msg.code);
-  window.localStorage.setItem('caurlUID', msg.code);
+  console.log(msg.guid);
+  window.localStorage.setItem('caurlUID', msg.guid);
   sendToEditor();
 });
 
