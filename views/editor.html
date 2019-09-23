@@ -11,6 +11,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
+      socket.emit('added user', "test_username");
     </script>
   </body>
 </html>

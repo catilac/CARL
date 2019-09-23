@@ -19,7 +19,7 @@ app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+  response.sendFile(__dirname + '/views/editor.html');
 });
 
 app.get('/editor', function(request, response) {
@@ -44,10 +44,13 @@ var numConnections = 0;
 const connections = {};
 
 io.on('connection', function(socket){
+  
   socket.on('added user', function(username) {
     // lets not worry about unique usernames...
+    console.log(`added user:  ${username}`)
     connections[username] = { code: '' };
     numConnections++;
+    
   });
   
   socket.on('disconnect', function(){
