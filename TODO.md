@@ -6,7 +6,7 @@
 [🕸] What is our marker going to be? How do we generate them? <br />
 
 ### Char
-[🕸] - not started <br />
+[🕸] -  <br />
 [🌝] Add Three.js<br />
 [🌝] Add [html editor](https://github.com/mrdoob/htmleditor) from Mr.doob <br />
 
