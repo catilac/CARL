@@ -1,9 +1,14 @@
 var container;
 var camera, scene, renderer;
 var uniforms;
+var editor;
 
 init();
 animate();
+
+function initEditor() {
+  editor = document.getElementById('editor');
+}
 
 function init() {
   container = document.getElementById( 'container' );
