@@ -1,33 +1,125 @@
+<!DOCTYPE html>
+
 <html>
   <head>
-    <title>👵</title>
-    
+    <meta charset="UTF-8">
+    <title>🧙</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    
   </head>
-  
+
   <body>
-    <h1>
-      Hello, young person! I am the editor!
-    </h1>
-    
-    <div id="registration">
-      <h2>
-        What is your handle, whippersnapper?
-      </h2>
-      <input type="text" id="userhandle-field"/>
-      <button id="register-button">
-        SUBMIT BUTTON
-      </button>
+    <div id='container'></div>
+    <div id='editor'>
+      hello
     </div>
-    
-    <div id="editor" class="hidden">
-      <h1>
-        HI
-      </h1>
-    </div>
- 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="client.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+        void main() {
+            gl_Position = vec4( position, 1.0 );
+        }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        #ifdef GL_ES
+        precision mediump float;
+        #endif
+
+        uniform vec2 u_resolution;
+        uniform vec2 u_mouse;
+        uniform float u_time;
+
+        float EPSILON = 0.000001;
+
+        // geometry
+        float smin( float a, float b, float k ) {
+            float res = exp2( -k*a ) + exp2( -k*b );
+            return -log2( res )/k;
+        }
+
+        float unionSDF(float d0, float d1) {
+          return smin(d0, d1, 32.);
+        }
+
+        float intersectSDF(float d0, float d1) {
+          return max(d0, d1);
+        }
+
+        float differenceSDF(float d0, float d1) {
+          return max(d0, -d1);
+        }
+
+        float sphereSDF(vec3 p, vec3 center, float r) {
+          return length(p - center) - r;
+        }
+
+        float planeSDF(vec3 p, float y) {
+          return p.y - y;
+        }
+
+        float sceneSDF(vec3 pos) {
+          float ds0 = sphereSDF(pos, vec3(.5, .5, 0.), 0.3);
+          float ds1 = sphereSDF(pos, vec3(0.35, abs(sin(u_time/2.)*0.89), 0.), 0.2);
+
+          return unionSDF(ds0, ds1);
+        }
+
+        vec3 estimateNormal(vec3 p) {
+          return normalize(vec3(
+          // dx
+            sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) -
+            sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
+
+          // dy
+            sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) -
+            sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
+
+          // dz
+            sceneSDF(vec3(p.x, p.y, p.z + EPSILON)) -
+            sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
+          ));
+        }
+
+        float lighting(vec3 ro, vec3 rd, vec3 n) {
+          vec3 lightRay = normalize(vec3(-1., 0., -1.) - ro);
+          float diffuse = max(0.0, dot(n, lightRay));
+          vec3 reflectedRay = rd - 2. * dot(n, rd) * n;
+          float specular = max(0.0, dot(reflectedRay, lightRay));
+          specular = pow(specular, 200.0);
+          return diffuse + specular;
+        }
+
+
+        vec3 trace(vec3 rayOrigin, vec3 dir) {
+          float totalDist = 0.;
+          vec3 color = vec3(0.5, 0., sin(u_time));
+
+          for (int i = 0; i < 100; i++) {
+            float dist = sceneSDF(rayOrigin);
+
+            rayOrigin += dist * dir;
+            totalDist += dist;
+
+            if (dist < EPSILON) {
+              color = vec3(totalDist);
+              break;
+            }
+          }
+
+          vec3 n = estimateNormal(rayOrigin);
+          float l = lighting(rayOrigin, dir, n);
+          return color * l;
+        }
+        
+        void main() {
+          vec2 st = -1. + 2. * gl_FragCoord.xy/u_resolution;
+
+          vec3 cameraOrigin = vec3(0., 0., -1.);
+          vec3 rayOrigin = vec3(st.x, st.y, 0);
+          vec3 dir = normalize(rayOrigin - cameraOrigin);
+
+          gl_FragColor = vec4(trace(cameraOrigin, dir), 1.0);
+        }
+    </script>
+    <script src='editor.js'></script>
   </body>
+
 </html>
