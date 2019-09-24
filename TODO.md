@@ -6,19 +6,18 @@
 
 ### Char
 
-[🕸] render over [AR](https://github.com/jeromeetienne/AR.js) <br />
+[🕸] replace [AR](https://github.com/jeromeetienne/AR.js)  with something more bare bones<br />
 [🌝] Add Three.js<br />
 [🌝] Add [html editor](https://github.com/mrdoob/htmleditor) from Mr.doob <br />
 
 ### Chirag
 [🌝] Create a way to have multiple live coders <br />
 [🎃] Update the shader when a live coder makes a change <br />
-  - Send back a UID to user
-  - Save UID in localstorage
-  - Send User to htmleditor/
-  - Find username based on uid or, like, that might not actually be necessary
 
 # LEGEND
 [🕸] - not started <br />
 [🎃] - in progress <br />
 [🌝] - done <br />
+
+
+## RESOURCES
