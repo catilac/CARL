@@ -30,6 +30,7 @@ app.get('/concert', function(request, response) {
   response.sendFile(__dirname + '/views/concert.html');
 });
 
+
 // DEBUG ROUTE
 app.get('/num_connections', function(request, response) {
   response.send({numConnections: Object.keys(connections)});

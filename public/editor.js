@@ -10,11 +10,26 @@ function initEditor() {
   editor = document.getElementById('editor');
   if (editor) {
     // add a change handler to try replacing the shader stuff with
+    // insert the default fragment shader code
+    editor.value = fragmentShader();
+    editor.onchange = onEdit;
   }
+}
+
+// this function will trigger a change to the editor
+function onEdit(e) {
+  const elem = e.target;
+  const fragmentCode = elem.value;
+}
+
+function updateShader(fragmentCode) {
+  
 }
 
 function init() {
   container = document.getElementById( 'container' );
+  
+  initEditor();
 
   camera = new THREE.Camera();
   camera.position.z = 1;
