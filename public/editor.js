@@ -30,7 +30,6 @@ function onEdit(e) {
 }
 
 function updateShader(fragmentCode) {
-  
 }
 
 function updateScene() {
@@ -96,9 +95,11 @@ function vertexShader() {
   `
 }
 
-
 function fragmentShader() {
-  return `      
+  return _fragmentShader;
+}
+
+var _fragmentShader = `      
 #ifdef GL_ES
   precision mediump float;
 #endif
@@ -198,4 +199,3 @@ void main() {
 
   gl_FragColor = vec4(trace(cameraOrigin, dir), 1.0);
 }`;
-}
