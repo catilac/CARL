@@ -4,10 +4,11 @@ var uniforms;
 var editor;
 
 // meow globals
-var scene;
 var geometry;
 var material;
 var mesh;
+
+var _fragmentShader;
 
 init();
 animate();
@@ -54,28 +55,12 @@ function init() {
   camera = new THREE.Camera();
   camera.position.z = 1;
 
-  // scene = new THREE.Scene();
-
-  // var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
-
   uniforms = {
     u_time: { type: "f", value: 1.0 },
     u_resolution: { type: "v2", value: new THREE.Vector2() },
     u_mouse: { type: "v2", value: new THREE.Vector2() }
   };
 
-  
-  // TODO okay make this update on change?
-  // ============
-  // ============
-  // var material = new THREE.ShaderMaterial( {
-  //   uniforms: uniforms,
-  //   vertexShader: vertexShader(),
-  //   fragmentShader: fragmentShader()
-  // } );
-
-  // var mesh = new THREE.Mesh( geometry, material );
-  // scene.add( mesh );
   
   updateScene();
   
@@ -113,9 +98,9 @@ function vertexShader() {
   `
 }
 
-function fragmentShader() { return _fragmentShader; }
 
-var _fragmentShader = `      
+function fragmentShader() {
+  return `      
 #ifdef GL_ES
   precision mediump float;
 #endif
@@ -215,3 +200,4 @@ void main() {
 
   gl_FragColor = vec4(trace(cameraOrigin, dir), 1.0);
 }`;
+}
