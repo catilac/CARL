@@ -6,7 +6,7 @@
 
 ### Char
 
-[🕸] replace [AR](https://github.com/jeromeetienne/AR.js)  with something more bare bones<br />
+[🎃] replace [AR](https://github.com/jeromeetienne/AR.js)  with something more bare bones<br />
 [🌝] Add Three.js<br />
 [🌝] Add [html editor](https://github.com/mrdoob/htmleditor) from Mr.doob <br />
 
