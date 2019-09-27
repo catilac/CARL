@@ -30,7 +30,7 @@ function onEdit(e) {
 }
 
 function updateShader(fragmentCode) {
-    
+  
 }
 
 function updateScene() {
@@ -44,7 +44,6 @@ function updateScene() {
   
   mesh = new THREE.Mesh( geometry, material );
   scene.add( mesh );
-
 }
 
 function init() {
@@ -60,7 +59,6 @@ function init() {
     u_resolution: { type: "v2", value: new THREE.Vector2() },
     u_mouse: { type: "v2", value: new THREE.Vector2() }
   };
-
   
   updateScene();
   
