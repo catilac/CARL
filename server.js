@@ -19,7 +19,12 @@ app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/register.html');
+  
+  // NOTE: Navigating to editor only for my convenience during development :o)
+  // feel free to change it back
+  
+  // response.sendFile(__dirname + '/views/register.html');
+  response.sendFile(__dirname + '/views/editor.html');
 });
 
 app.get('/editor', function(request, response) {

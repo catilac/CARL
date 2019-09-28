@@ -8,8 +8,6 @@ var geometry;
 var material;
 var mesh;
 
-var _fragmentShader;
-
 init();
 animate();
 
@@ -35,14 +33,21 @@ function updateShader(fragmentCode) {
 function updateScene() {
   scene = new THREE.Scene();
   geometry = new THREE.PlaneBufferGeometry( 2, 2 );
-  material = new THREE.ShaderMaterial( {
-    uniforms: uniforms,
-    vertexShader: vertexShader(),
-    fragmentShader: fragmentShader()
-  } );
   
-  mesh = new THREE.Mesh( geometry, material );
-  scene.add( mesh );
+  
+  try {
+    material = new THREE.ShaderMaterial( {
+      uniforms: uniforms,
+      vertexShader: vertexShader(),
+      fragmentShader: fragmentShader()
+    } );
+
+    mesh = new THREE.Mesh( geometry, material );
+    scene.add( mesh );  
+  } catch {
+    console.log("ERROR");
+    return;
+  }
 }
 
 function init() {
@@ -95,11 +100,9 @@ function vertexShader() {
   `
 }
 
-function fragmentShader() {
-  return _fragmentShader;
-}
 
-var _fragmentShader = `      
+
+let _fragmentShader = `      
 #ifdef GL_ES
   precision mediump float;
 #endif
@@ -199,3 +202,7 @@ void main() {
 
   gl_FragColor = vec4(trace(cameraOrigin, dir), 1.0);
 }`;
+
+function fragmentShader() {
+  return _fragmentShader;
+}
