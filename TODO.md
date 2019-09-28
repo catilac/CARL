@@ -12,7 +12,8 @@
 
 ### Chirag
 [🌝] Create a way to have multiple live coders <br />
-[🎃] Update the shader when a live coder makes a change <br />
+[🌝] Update the shader when a live coder makes a change <br />
+[🎃] Make changes to the htmleditor
 
 # LEGEND
 [🕸] - not started <br />

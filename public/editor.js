@@ -102,6 +102,7 @@ function animate() {
 }
 
 function render() {
+  updateScene();
   uniforms.u_time.value += 0.05;
   renderer.render( scene, camera );
 }

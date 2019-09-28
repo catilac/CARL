@@ -18,13 +18,8 @@ const listener = server.listen(process.env.PORT || 3000, function() {
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response) {
-  
-  // NOTE: Navigating to editor only for my convenience during development :o)
-  // feel free to change it back (o _ o)v
-  
-  // response.sendFile(__dirname + '/views/register.html');
-  response.sendFile(__dirname + '/views/editor.html');
+app.get('/', function(request, response) {  
+  response.sendFile(__dirname + '/views/register.html');
 });
 
 app.get('/editor', function(request, response) {
