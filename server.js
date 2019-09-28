@@ -21,7 +21,7 @@ app.use(express.static('public'));
 app.get('/', function(request, response) {
   
   // NOTE: Navigating to editor only for my convenience during development :o)
-  // feel free to change it back
+  // feel free to change it back (o _ o)v
   
   // response.sendFile(__dirname + '/views/register.html');
   response.sendFile(__dirname + '/views/editor.html');
