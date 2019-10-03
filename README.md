@@ -1,7 +1,7 @@
 HI THIS IS CAuRL
 =================
 
-CAuRL stands for Code Augmented Reality Live
+CAuRL stands for Code AUgmented Reality Live
 
 -------------------
 
