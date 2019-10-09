@@ -28,5 +28,5 @@ if (submitButton) {
 // helpers
 
 function sendToEditor() {
-  window.location = '/htmleditor';
+  window.location = '/editor';
 }

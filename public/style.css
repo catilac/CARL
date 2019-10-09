@@ -79,7 +79,7 @@ footer {
 .CodeMirror {
   position: absolute !important;
   top: 0; left: 0;
-  background-color: rgba(255, 255, 255, 122) !important;
+  background-color: rgba(255, 255, 255, 0.35) !important;
   width: 50%;
   height: 100% !important;
 }

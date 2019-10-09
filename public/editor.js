@@ -71,6 +71,12 @@ function updateScene() {
 }
 
 function init() {
+  
+        // SOCKET IO
+      var socket = io();
+      var caurl_id = window.localStorage.getItem('caurlUID');
+      socket.emit('livecode-enter', caurl_id);
+  
   container = document.getElementById( 'container' );
   
   initEditor();
