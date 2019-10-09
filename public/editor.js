@@ -1,7 +1,3 @@
-var myCodeMirror = CodeMirror(document.body, {
-  value: _fragmentShader,
-  mode: 'clike'
-});
 
 var container;
 var camera, scene, renderer;
@@ -39,6 +35,13 @@ function initEditor() {
     editor.value = fragmentShader();
     editor.onchange = onEdit;
   }
+  
+  var myCodeMirror = CodeMirror(document.body, {
+  value: fragmentShader(),
+  lineNumbers: true,
+  mode: 'clike'
+});
+
 }
 
 // this function will trigger a change to the editor
