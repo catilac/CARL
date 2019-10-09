@@ -74,6 +74,12 @@ footer {
   display: none;
 }
 
-#editor { background-color: red; }
-
 #container { width: 10%; height: 20%; }
+
+.CodeMirror {
+  position: absolute !important;
+  top: 0; left: 0;
+  background-color: rgba(255, 255, 255, 122) !important;
+  width: 50%;
+  height: 100% !important;
+}
