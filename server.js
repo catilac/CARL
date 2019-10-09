@@ -50,7 +50,9 @@ io.on("connection", function(socket) {
     console.log("livecode-enter + ", guid);
   });
   
-  socket.on("code-update")
+  socket.on("livecode-update", function(guid, code) {
+    console.log("CODE UPDATE:", guid, code);
+  })
 
   socket.on("disconnect", function() {
     //

@@ -11,6 +11,9 @@ var geometry;
 var material;
 var mesh;
 
+var caurl_id;
+var socket;
+
 var _fragmentShader = `      
 #ifdef GL_ES
   precision mediump float;
@@ -63,23 +66,28 @@ function updateScene() {
       fragmentShader: fragmentShader()
     } );
 
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
-    
-    // if we get here, send the code over the wire
+
+
     
     
   } catch (e) {
     console.log(e);
+    return;
   }
+  
+      mesh = new THREE.Mesh( geometry, material );
+    scene.add( mesh );
+    
+    // if we get here, send the code over the wire
+    socket.emit('livecode-update', caurl_id, fragmentShader());
 }
 
 function init() {
   
-        // SOCKET IO
-      var socket = io();
-      var caurl_id = window.localStorage.getItem('caurlUID');
-      socket.emit('livecode-enter', caurl_id);
+  // SOCKET IO
+  socket = io();
+  caurl_id = window.localStorage.getItem('caurlUID');
+  socket.emit('livecode-enter', caurl_id);
   
   container = document.getElementById( 'container' );
   
