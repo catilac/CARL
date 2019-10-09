@@ -1,3 +1,5 @@
+var myCodeMirror = CodeMirror(document.body);
+
 var container;
 var camera, scene, renderer;
 var uniforms;
