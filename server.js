@@ -22,7 +22,6 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/register.html");
 });
 
-// Just a proof of concept
 app.get("/editor", function(request, response) {
   response.sendFile(__dirname + "/views/editor.html");
 });
@@ -50,6 +49,8 @@ io.on("connection", function(socket) {
   socket.on("livecode-enter", function(guid) {
     console.log("livecode-enter + ", guid);
   });
+  
+  socket.on("code-update")
 
   socket.on("disconnect", function() {
     //

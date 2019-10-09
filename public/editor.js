@@ -65,6 +65,10 @@ function updateScene() {
 
     mesh = new THREE.Mesh( geometry, material );
     scene.add( mesh );
+    
+    // if we get here, send the code over the wire
+    
+    
   } catch (e) {
     console.log(e);
   }
