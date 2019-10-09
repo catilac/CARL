@@ -1,4 +1,7 @@
-
+var myCodeMirror = CodeMirror(document.body, {
+  value: _fragmentShader,
+  mode: 'clike'
+});
 
 var container;
 var camera, scene, renderer;
@@ -53,9 +56,6 @@ function updateShader(fragmentCode) {
 function updateScene() {
   scene = new THREE.Scene();
   geometry = new THREE.PlaneBufferGeometry( 2, 2 );
-  
-  
-  console.log(fragmentShader());
   
   material = new THREE.ShaderMaterial( {
     uniforms: uniforms,
