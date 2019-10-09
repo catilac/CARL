@@ -72,11 +72,11 @@ function updateScene() {
     return;
   }
   
-      mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+  mesh = new THREE.Mesh( geometry, material );
+  scene.add( mesh );
     
     // if we get here, send the code over the wire
-    socket.emit('livecode-update', caurl_id, fragmentShader());
+  socket.emit('livecode-update', caurl_id, fragmentShader());
 }
 
 function init() {
