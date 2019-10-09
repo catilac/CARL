@@ -52,6 +52,8 @@ io.on("connection", function(socket) {
   
   socket.on("livecode-update", function(guid, code) {
     console.log("CODE UPDATE:", guid, code);
+    // save the code here
+    connections[guid]['code'] = code;
   })
 
   socket.on("disconnect", function() {
