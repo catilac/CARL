@@ -4,6 +4,8 @@ var camera, scene, renderer;
 var uniforms;
 var editor;
 
+var codemirror;
+
 // meow globals
 var geometry;
 var material;
@@ -28,26 +30,20 @@ init();
 animate();
 
 function initEditor() {
-  editor = document.getElementById('editor');
-  if (editor) {
-    // add a change handler to try replacing the shader stuff with
-    // insert the default fragment shader code
-    editor.value = fragmentShader();
-    editor.onchange = onEdit;
-  }
   
-  var myCodeMirror = CodeMirror(document.body, {
-  value: fragmentShader(),
-  lineNumbers: true,
-  mode: 'clike'
-});
+  codemirror = CodeMirror(document.body, {
+    value: fragmentShader(),
+    lineNumbers: true,
+    mode: "x-shader/x-vertex"
+  });
+  
+  codemirror.on('change', onEdit);
 
 }
 
 // this function will trigger a change to the editor
-function onEdit(e) {
-  const elem = e.target;
-  const fragmentCode = elem.value;
+function onEdit() {
+  const fragmentCode = codemirror.getValue();
   updateShader(fragmentCode);
 }
 
@@ -60,14 +56,18 @@ function updateScene() {
   scene = new THREE.Scene();
   geometry = new THREE.PlaneBufferGeometry( 2, 2 );
   
-  material = new THREE.ShaderMaterial( {
-    uniforms: uniforms,
-    vertexShader: vertexShader(),
-    fragmentShader: fragmentShader()
-  } );
+  try {
+    material = new THREE.ShaderMaterial( {
+      uniforms: uniforms,
+      vertexShader: vertexShader(),
+      fragmentShader: fragmentShader()
+    } );
 
-  mesh = new THREE.Mesh( geometry, material );
-  scene.add( mesh );  
+    mesh = new THREE.Mesh( geometry, material );
+    scene.add( mesh );
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 function init() {
