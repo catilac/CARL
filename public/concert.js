@@ -25,7 +25,7 @@ uniform vec3 u_camPos;
 void main() {
   vec2 st = -1. + 2. * gl_FragCoord.xy/u_resolution;
 
-  gl_FragColor = vec4(st.x, ((sin(u_camPos.x)+1.0) / 2.0), 0.5, 1.0);
+  gl_FragColor = vec4(st.x, ((sin(u_camPos.x)+1.0) / 2.0), 0.5, st.y);
 }`;
 
 init();
@@ -98,9 +98,10 @@ function render() {
   
   // update camera position
   var _camera = document.querySelector("a-camera");
-  var pos = _camera.getAttribute("position");
-  console.log(_rotation.x);
-  uniforms.u_camPos.value = new THREE.Vector3(_rotation.x, _rotation.y, _rotation.z);
+  
+  var rot = _camera.getAttribute("rotation");
+  console.log(rot);
+  uniforms.u_camPos.value = new THREE.Vector3(rot.x, rot.y, rot.z);
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
   
   renderer.render( scene, threeCam );
@@ -119,15 +120,15 @@ function vertexShader() {
   `
 }
 //https://aframe.io/docs/0.9.0/components/camera.html#reading-position-or-rotation-of-the-camera
-AFRAME.registerComponent('rotation-reader', {
-  tick: function () {
-    // `this.el` is the element.
-    // `object3D` is the three.js object.
+// AFRAME.registerComponent('rotation-reader', {
+//   tick: function () {
+//     // `this.el` is the element.
+//     // `object3D` is the three.js object.
 
-    // `rotation` is a three.js Euler using radians. `quaternion` also available.
-    _rotation = this.el.object3D.rotation;
+//     // `rotation` is a three.js Euler using radians. `quaternion` also available.
+//     _rotation = this.el.object3D.rotation;
 
-    // `position` is a three.js Vector3.
-    console.log(this.el.object3D.position);
-  }
-});
+//     // `position` is a three.js Vector3.
+//     console.log(this.el.object3D.position);
+//   }
+// });
