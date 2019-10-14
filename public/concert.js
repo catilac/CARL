@@ -7,10 +7,10 @@ var uniforms;
 var geometry;
 var material;
 var mesh;
+var feed;
 
 var caurl_id;
 var socket;
-var _rotation = new THREE.Euler(0, 0, 0, 'XYZ');
 
 var _fragmentShader = `      
 #ifdef GL_ES
@@ -21,6 +21,7 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 uniform vec3 u_camPos;
+uniform sampler2D u_feed;
 
 void main() {
   vec2 st = -1. + 2. * gl_FragCoord.xy/u_resolution;
@@ -61,12 +62,16 @@ function init() {
   
   threeCam = new THREE.Camera();
   threeCam.position.z = 1;
-
+  
+  video = document.querySelector( 'video' );
+  feed = new THREE.VideoTexture( video );
+  
   uniforms = {
     u_time: { type: "f", value: 1.0 },
     u_resolution: { type: "v2", value: new THREE.Vector2() },
     u_mouse: { type: "v2", value: new THREE.Vector2() },
     u_camPos: {type: "v3", value: new THREE.Vector3() }
+    u_feed: {type: "", value: new THREE.videoTexture()}
     
     // add camera orientation to this?
   };
@@ -103,6 +108,8 @@ function render() {
   var rot = _camera.getAttribute("rotation");
   uniforms.u_camPos.value = new THREE.Vector3(rot.x, rot.y, rot.z);
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
+  
+  uniforms.u_feed.value = feed;
   
   renderer.render( scene, threeCam );
 
