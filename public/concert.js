@@ -99,6 +99,7 @@ function render() {
   // update camera position
   var _camera = document.querySelector("a-camera");
   var pos = _camera.getAttribute("position");
+  console.log(_rotation.x);
   uniforms.u_camPos.value = new THREE.Vector3(_rotation.x, _rotation.y, _rotation.z);
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
   
