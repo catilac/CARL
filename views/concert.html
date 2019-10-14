@@ -10,13 +10,13 @@
         <script src="concert.js" defer></script>
 
 
-        <title>A-Frame Starter Kit - Mini Animated Planetarium</title>
-        <meta name="description" content="Build your own planetarium with A-frame">
+        <title>CAURL</title>
+        <meta name="description" content="Code AUgmented Reality Live">
         <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-        <script src="https://unpkg.com/aframe-star-system-component@1.0.0/index.js"></script>
+<!--         <script src="https://unpkg.com/aframe-star-system-component@1.0.0/index.js"></script> -->
 
         <!-- let's add the animation and orbit controls components -->
-        <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script>
+<!--         <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script> -->
         <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
     </head>
 
@@ -40,8 +40,12 @@
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
-      <a-entity camera></a-entity>
+<!--       <a-entity camera></a-entity> -->
     </a-scene> 
+      
+      <div id="container">
+      </div>
+      
   </body>
       <pre></pre>
 
@@ -51,27 +55,3 @@
     <script src="https://button.glitch.me/button.js"></script>
 </html>
 
-
-<!-- <html>
-  <head>
-<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-box></a-box>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
-
-      <a-camera
-        position="0 8 0"
-        raycaster="objects: .cantap"
-        cursor="
-          fuse: false;
-          rayOrigin: mouse;">
-      </a-camera>
-      
-      <a-light type="ambient" intensity="1"></a-light>
-     <a-entity camera></a-entity>
-
-    </a-scene>
-  </body>
-</html> -->

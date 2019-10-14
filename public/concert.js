@@ -24,7 +24,7 @@ uniform vec3 u_camPos;
 void main() {
   vec2 st = -1. + 2. * gl_FragCoord.xy/u_resolution;
 
-  gl_FragColor = vec4(st.x, ((sin(u_camPos.x)+1.0) / 2.0), 0.5, 1.0);
+  gl_FragColor = vec4(st.x, ((sin(u_camPos.x)+1.0) / 2.0), 0.5, ((sin(u_camPos.y)+1.0) / 2.0));
 }`;
 
 init();
@@ -94,12 +94,11 @@ function animate() {
 function render() {
   updateScene();
   uniforms.u_time.value += 0.05;
-  renderer.render( scene, camera );
+  renderer.render( scene, threeCam );
   
-  var camera = document.querySelector("a-camera");
-  var pos = camera.getAttribute("position").split(" ");
-  
-  uniforms.u_camPos = new THREE.Vector3(pos[0], pos[1], pos[2]);
+  var _camera = document.querySelector("a-camera");
+  var pos = _camera.getAttribute("position");
+  uniforms.u_camPos = new THREE.Vector3(pos.x, pos.y, pos.z);
 
 }
 
