@@ -7,8 +7,7 @@
         <script src="camera.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
         <script src="/socket.io/socket.io.js" defer></script>
-        <script src="concert.js" defer></script>
-
+      
 
         <title>CAURL</title>
         <meta name="description" content="Code AUgmented Reality Live">
@@ -21,15 +20,19 @@
     </head>
 
     <body>
-         <div class="app">
-      <div class="vidholder"></div>
-      <button>start</button>      
-    </div>
+      <div id="container"></div>
+      <script src="concert.js" defer></script>
+
+
+      <div class="app">
+        <div class="vidholder"></div>
+        <button>start</button>      
+      </div>
       <a-scene>
       
         <a-camera
         position="0 8 0">
-      </a-camera>
+        </a-camera>
         
         
 <!--                 raycaster="objects: .cantap"
@@ -44,9 +47,7 @@
       <a-sky color="#ECECEC"></a-sky> -->
 <!--       <a-entity camera></a-entity> -->
     </a-scene> 
-      
-      <div id="container">
-      </div>
+    
       <pre></pre>
 
     <!-- include the Glitch button to show what the webpage is about and
