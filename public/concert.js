@@ -1,6 +1,6 @@
 
 var container;
-var camera, scene, renderer;
+var threeCam, scene, renderer;
 var uniforms;
 
 // meow globals
@@ -19,11 +19,12 @@ var _fragmentShader = `
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
+uniform vec3 u_camPos;
 
 void main() {
   vec2 st = -1. + 2. * gl_FragCoord.xy/u_resolution;
 
-  gl_FragColor = vec4(st.x, st.y, sin(u_time), 1.0);
+  gl_FragColor = vec4(st.x, ((sin(u_camPos.x)+1.0) / 2.0), 0.5, 1.0);
 }`;
 
 init();
@@ -50,24 +51,20 @@ function updateScene() {
   mesh = new THREE.Mesh( geometry, material );
   scene.add( mesh );
     
-    // if we get here, send the code over the wire
-  socket.emit('livecode-update', caurl_id, fragmentShader());
 }
 
 function init() {
-  
-  // SOCKET IO
-  socket = io();
-  
+    
   container = document.getElementById( 'container' );
   
-  camera = new THREE.Camera();
-  camera.position.z = 1;
+  threeCam = new THREE.Camera();
+  threeCam.position.z = 1;
 
   uniforms = {
     u_time: { type: "f", value: 1.0 },
     u_resolution: { type: "v2", value: new THREE.Vector2() },
-    u_mouse: { type: "v2", value: new THREE.Vector2() }
+    u_mouse: { type: "v2", value: new THREE.Vector2() },
+    u_camPos: {type: "v3", value: new THREE.Vector3() }
     
     // add camera orientation to this?
   };
@@ -98,8 +95,22 @@ function render() {
   updateScene();
   uniforms.u_time.value += 0.05;
   renderer.render( scene, camera );
+  
+  var camera = document.querySelector("a-camera");
+  var pos = camera.getAttribute("position").split(" ");
+  
+  uniforms.u_camPos = new THREE.Vector3(pos[0], pos[1], pos[2]);
+
 }
 
 function fragmentShader() {
   return _fragmentShader;
+}
+
+function vertexShader() {
+  return `        
+    void main() {
+      gl_Position = vec4( position, 1.0 );
+    }
+  `
 }

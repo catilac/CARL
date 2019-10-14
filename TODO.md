@@ -17,6 +17,7 @@
 [🎃] Make changes to the htmleditor
   - [🌝]live coding action
   - [🕸]send the shader code to the server
+[ ] For concert - make sure we're not recreating the scene too much -- performance
 
 
 
