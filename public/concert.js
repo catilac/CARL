@@ -94,11 +94,17 @@ function animate() {
 function render() {
   updateScene();
   uniforms.u_time.value += 0.05;
-  renderer.render( scene, threeCam );
   
+  // update camera position
   var _camera = document.querySelector("a-camera");
   var pos = _camera.getAttribute("position");
   uniforms.u_camPos = new THREE.Vector3(pos.x, pos.y, pos.z);
+  
+  console.trace();
+  
+  renderer.render( scene, threeCam );
+  
+
 
 }
 
