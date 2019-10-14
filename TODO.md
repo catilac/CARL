@@ -28,10 +28,10 @@
 
 # TIMELINE
 
-MON 
-TUE 
-WED 
-THR 
-FRI test it out!
+MON Get Aframe working with a shader rendering over camera feed <br />
+TUE intergrate editor into shader in aframe <br />
+WED ? <br />
+THR ? <br />
+FRI test it out! <br />
 
 ## RESOURCES
