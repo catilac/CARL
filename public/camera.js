@@ -1,3 +1,7 @@
+// this script is from cut-ruby.glitch.me
+
+// so good
+
 if (window.location.protocol !== 'https:') {
   window.location = 'https://' + window.location.hostname;
 }
