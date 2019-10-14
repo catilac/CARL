@@ -34,6 +34,7 @@ animate();
 
 function updateScene() {
   scene = new THREE.Scene();
+  scene.background = new THREE.Color( 0xff0000 );
   geometry = new THREE.PlaneBufferGeometry( 2, 2 );
   
   try {
@@ -100,7 +101,6 @@ function render() {
   var _camera = document.querySelector("a-camera");
   
   var rot = _camera.getAttribute("rotation");
-  console.log(rot);
   uniforms.u_camPos.value = new THREE.Vector3(rot.x, rot.y, rot.z);
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
   
@@ -119,16 +119,3 @@ function vertexShader() {
     }
   `
 }
-//https://aframe.io/docs/0.9.0/components/camera.html#reading-position-or-rotation-of-the-camera
-// AFRAME.registerComponent('rotation-reader', {
-//   tick: function () {
-//     // `this.el` is the element.
-//     // `object3D` is the three.js object.
-
-//     // `rotation` is a three.js Euler using radians. `quaternion` also available.
-//     _rotation = this.el.object3D.rotation;
-
-//     // `position` is a three.js Vector3.
-//     console.log(this.el.object3D.position);
-//   }
-// });

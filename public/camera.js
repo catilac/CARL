@@ -40,12 +40,13 @@ document.querySelector('.vidholder').appendChild(camera.video);
 button.addEventListener('click', function (e) {
   camera.init().then(start).catch(e => console.error(e));
 });
+(function () {
+      camera.init().then(start).catch(e => console.error(e));
+
+})();
 
 function start() {
-  button.style.display = 'none';
-  let flip = document.createElement('button');
-  flip.innerText = 'flip camera'
-  document.body.appendChild(flip)
+
   flip.addEventListener('click', function (e) {
     camera.flip();
   });
