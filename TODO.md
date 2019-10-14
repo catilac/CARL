@@ -3,7 +3,7 @@
 ## Our List
 [🕸] Keep track of `which` shader the user is looking at <br />
 [🕸] What is our marker going to be? How do we generate them? <br />
-[🕸] oh AR
+[🎃] oh AR
 
 ### Char
 
@@ -25,5 +25,13 @@
 [🎃] - in progress <br />
 [🌝] - done <br />
 
+
+# TIMELINE
+
+MON 
+TUE 
+WED 
+THR 
+FRI test it out!
 
 ## RESOURCES
