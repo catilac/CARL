@@ -18,7 +18,7 @@ var _fragmentShader = `
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
-uniform vec3 u_camRot;
+uniform vec4 u_camRot;
 uniform sampler2D u_feed;
 
 // Define some constants
@@ -26,6 +26,12 @@ const int steps = 128; // This is the maximum amount a ray can march.
 const float smallNumber = 0.001;
 const float maxDist = 10.; // This is the maximum distance a ray can travel.
  
+
+vec3 rotate_vector( vec4 quat, vec3 vec )
+{
+return vec + 2.0 * cross( cross( vec, quat.xyz ) + quat.w * vec, quat.xyz );
+}
+
 float scene(vec3 position){
     // So this is different from the sphere equation above in that I am
     // splitting the position into its three different positions
@@ -97,19 +103,16 @@ void main(void)
     
     vec3 rayOrigin = vec3(uv, 0.);
     vec3 camOrigin = vec3(0., 0., -1.);
-    vec3 direction = camOrigin + rayOrigin;
+
+
+    vec3 dir = camOrigin + rayOrigin;
+
+    dir = rotate_vector(u_camRot, dir);
 
     // This reserved variable is what we must set the final color to
-    gl_FragColor = trace(rayOrigin, direction);
+    gl_FragColor = trace(rayOrigin, dir);
 }
 
-//void main() {
-//  vec2 st = -1. + 2. * gl_FragCoord.xy/u_resolution;
-
-  // gl_FragColor = vec4(texture2D(u_feed,gl_FragCoord.xy * u_resolution).r, ((sin(u_camRot.x)+1.0) / 2.0), 0.5, 1.0);
-
-//  gl_FragColor = texture2D(u_feed, gl_FragCoord.xy/u_resolution).rrrr;
-//}
 
 `;
 
@@ -190,6 +193,7 @@ function render() {
   var _camera = document.querySelector("a-camera");
   
   var rot = _camera.getAttribute("rotation");
+  
   uniforms.u_camRot.value = new THREE.Vector3(rot.x, rot.y, rot.z);
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
   
