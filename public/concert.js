@@ -74,12 +74,7 @@ float scene(vec3 position){
             position.y, 
             position.z+ sin(u_time) +1.)
         )-0.5;
-    
-    // This is different from the ground equation because the UV is only 
-    // between -1 and 1 we want more than 1/2pi of a wave per length of the 
-    // screen so we multiply the position by a factor of 10 inside the trig 
-    // functions. Since sin and cos oscillate between -1 and 1, that would be 
-    // the entire height of the screen so we divide by a factor of 10.
+ 
     float ground = position.y + sin(position.x * 10.) / 10. 
                               + cos(position.z * 10.) / 10. + 1.;
     
@@ -132,12 +127,13 @@ void main(void)
     
     vec3 rayOrigin = vec3(uv, 0.);
     vec3 camOrigin = vec3(0., 0., -1.);
+    
 
 
     
     
 
-    vec3 zAxis = normalize(camTarget - camOrigin);
+    vec3 zAxis = vec3(0,0,1);
     vec3 up = vec3(0,1,0);
     vec3 xAxis = normalize(cross(up, zAxis));
     vec3 yAxis = normalize(cross(zAxis, xAxis));
@@ -145,13 +141,25 @@ void main(void)
     // we need to apply rotate 3 times each with rotation on the relative object, 
     // then we can get the lookat direction that we need. SO lets start with looking at forward
 
-    vec3 dirToLook = zAxis;
+    vec3 dirToLook = normalize(camOrigin + rayOrigin);
     
+    // according to 3js docs Default order is 'XYZ'
+  
+    dirToLook = rotateEuler(dirToLook, xAxis, u_camRot.x);
+    // so thats the first, now we need the other two axiss to be relative to this one so lets rotate them
+    yAxis = rotateEuler(yAxis, xAxis, u_camRot.x);
+    zAxis = rotateEuler(zAxis, xAxis, u_camRot.x);
+    // next up is y rotation
+    dirToLook = rotateEuler(dirToLook, yAxis, u_camRot.y);
+    // make the z axis relative to the object again
+    zAxis = rotateEuler(zAxis, yAxis, u_camRot.y);
+    // finally lets rotate the z axis
+    dirToLook = otateEuler(dirToLook, zAxis, u_camRot.z);
 
-    vec3 dir = lookAt();
+    vec3 dir = lookAt(uv, camOrigin, dirToLook);
 
     // This reserved variable is what we must set the final color to
-    gl_FragColor = trace(rayOrigin, dir);
+    gl_FragColor = trace(camOrigin, dir);
 }
 
 
