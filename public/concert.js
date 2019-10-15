@@ -79,7 +79,7 @@ float scene(vec3 position){
                               + cos(position.z * 10.) / 10. + 1.;
     
    
-    return min(sphere,ground);
+    return ground;
 }
 vec4 trace (vec3 origin, vec3 direction){
     
@@ -128,9 +128,6 @@ void main(void)
     vec3 rayOrigin = vec3(uv, 0.);
     vec3 camOrigin = vec3(0., 0., -1.);
     
-
-
-    
     
 
     vec3 zAxis = vec3(0,0,1);
@@ -141,20 +138,20 @@ void main(void)
     // we need to apply rotate 3 times each with rotation on the relative object, 
     // then we can get the lookat direction that we need. SO lets start with looking at forward
 
-    vec3 dirToLook = normalize(camOrigin + rayOrigin);
+    vec3 dirToLook = zAxis;//normalize(camOrigin + rayOrigin);
     
     // according to 3js docs Default order is 'XYZ'
   
-    dirToLook = rotateEuler(dirToLook, xAxis, u_camRot.x);
+    dirToLook = rotateEuler(dirToLook, xAxis, radians(u_camRot.x));
     // so thats the first, now we need the other two axiss to be relative to this one so lets rotate them
-    yAxis = rotateEuler(yAxis, xAxis, u_camRot.x);
-    zAxis = rotateEuler(zAxis, xAxis, u_camRot.x);
+    yAxis = rotateEuler(yAxis, xAxis, radians(u_camRot.x) );
+    zAxis = rotateEuler(zAxis, xAxis, radians(u_camRot.x) );
     // next up is y rotation
-    dirToLook = rotateEuler(dirToLook, yAxis, u_camRot.y);
+    dirToLook = rotateEuler(dirToLook, yAxis, radians(u_camRot.y) );
     // make the z axis relative to the object again
-    zAxis = rotateEuler(zAxis, yAxis, u_camRot.y);
+    zAxis = rotateEuler(zAxis, yAxis, radians(u_camRot.y) );
     // finally lets rotate the z axis
-    dirToLook = otateEuler(dirToLook, zAxis, u_camRot.z);
+    dirToLook = rotateEuler(dirToLook, zAxis, radians(u_camRot.z) );
 
     vec3 dir = lookAt(uv, camOrigin, dirToLook);
 
