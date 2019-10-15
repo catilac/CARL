@@ -20,7 +20,9 @@ uniform vec2 u_mouse;
 uniform float u_time;
 uniform vec4 u_camRot;
 uniform sampler2D u_feed;
-
+#define PI 3.14159265
+#define TAU (2*PI)
+#define PHI (sqrt(5)*0.5 + 0.5)
 // Define some constants
 const int steps = 128; // This is the maximum amount a ray can march.
 const float smallNumber = 0.001;
@@ -62,24 +64,53 @@ vec3 rotateEuler(vec3 v, vec3 axis, float angle) {
 	return (m * vec4(v, 1.0)).xyz;
 }
 
+float sqrt(int s){
+    return pow(float(s),0.5);
+}
+
+ float fBlob(vec3 p) {
+    p = abs(p);
+    if (p.x < max(p.y, p.z)) p = p.yzx;
+    if (p.x < max(p.y, p.z)) p = p.yzx;
+    float b = max(max(max(
+        dot(p, normalize(vec3(1, 1, 1))),
+        dot(p.xz, normalize(vec2(PHI+1., 1)))),
+        dot(p.yx, normalize(vec2(1., PHI)))),
+        dot(p.xz, normalize(vec2(1., PHI))));
+    float l = length(p);
+    return l - 0.2 - 1. * (tan(u_time) /1.2)* cos(min(sqrt(1.01 - b / l)*(PI / 0.25), PI));
+}
+
+float smin( float a, float b, float k )
+{
+    float h = clamp( 0.5+0.5*(b-a)/k, 0.0, 1.0 );
+    return mix( b, a, h ) - k*h*(1.0-h);
+}
 float scene(vec3 position){
-    // So this is different from the sphere equation above in that I am
-    // splitting the position into its three different positions
-    // and adding a 10th of a cos wave to the x position so it oscillates left 
-    // to right and a (positive) sin wave to the z position
-    // so it will go back and forth.
+    
     float sphere = length(
         vec3(
             position.x + cos(u_time)/10., 
             position.y, 
             position.z+ sin(u_time) +1.)
         )-0.5;
+    float b = fBlob(vec3(
+            position.x + cos(u_time)/10., 
+            position.y, 
+            position.z+ ((sin(u_time) +1. + 2.)/2.)-1.)
+        );
  
+    
     float ground = position.y + sin(position.x * 10.) / 10. 
                               + cos(position.z * 10.) / 10. + 1.;
+    float ground2 = -position.y + sin(position.x * 10.) / 10. 
+                              + cos(position.z * 10.) / 10. + 1.;
+                              
+    ground = smin(ground,ground2,1.);
     
-   
-    return ground;
+    // We want to return whichever one is closest to the ray, so we return the 
+    // minimum distance.
+    return smin(b,ground, 1.);
 }
 vec4 trace (vec3 origin, vec3 direction){
     

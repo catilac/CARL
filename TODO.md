@@ -4,18 +4,23 @@
 [🕸] audio? <br />
   - Probably Sound Cloud <br />
   https://glitch.com/~soundcloud-waveform<br />
+  
 [🕸] ! fix rotation coordinate system (switch to quaternion) <br />
-[🕸] figure out how we are going to interface with the dance krew! <br />
+[🕸] figure out how we are going to interface with the dance krew! <br />  
   -color?<br />
   -movement?<br />
   -camera placement<br />
+  -what will they be dancing to?<br />
   
 [🕸] For concert - make sure we're not recreating the scene too much -- performance <br />
 [🕸]! Start receiving updated shader code, make sure it works well <br />
+
 [🕸]! Make sure editor is reflective of what is happening on people's cameras...or something <br />
   - I'm thinking about u_camPos and how we use that<br />
-[🕸] Think hard about...which mobile browsers do and don't work. Androiddd<br />
-
+  
+[🕸] which mobile browsers do and don't work. Androiddd<br />
+  - check and update BROWSER-INFO.md 
+  
 [🕸] Explore some of the creative possibilities once the tech is feeling stable<br />
 
 
@@ -27,7 +32,7 @@
 [🕸] live music streaming to the phones<br />
 [🕸] What is our marker going to be? How do we generate them? <br />
 [🕸] realtime lighting <br />
-
+[🕸] what happens when we have time to build custom servers for streaming music and code <br />
 
  
 ### Char
