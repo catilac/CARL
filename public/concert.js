@@ -78,7 +78,7 @@ float sqrt(int s){
         dot(p.yx, normalize(vec2(1., PHI)))),
         dot(p.xz, normalize(vec2(1., PHI))));
     float l = length(p);
-    return l - 0.2 - 1. * (tan(u_time) /1.2)* cos(min(sqrt(1.01 - b / l)*(PI / 0.25), PI));
+    return l - 0.2 - 1. * ((u_time) /1.2)* cos(min(sqrt(1.01 - b / l)*(PI / 0.25), PI));
 }
 
 float smin( float a, float b, float k )
@@ -86,6 +86,7 @@ float smin( float a, float b, float k )
     float h = clamp( 0.5+0.5*(b-a)/k, 0.0, 1.0 );
     return mix( b, a, h ) - k*h*(1.0-h);
 }
+
 float scene(vec3 position){
     
     float sphere = length(
@@ -101,16 +102,36 @@ float scene(vec3 position){
         );
  
     
-    float ground = position.y + sin(position.x * 10.) / 10. 
+    float ground = (position.y) + sin(position.x * 10.) / 10. 
                               + cos(position.z * 10.) / 10. + 1.;
-    float ground2 = -position.y + sin(position.x * 10.) / 10. 
-                              + cos(position.z * 10.) / 10. + 1.;
+    float ground2 = -(position.y) + sin(position.x * 10.) / 10. 
+                              - cos(position.z * 10.) / 10. + 1.;
                               
-    ground = smin(ground,ground2,1.);
+    //ground = smin(ground,ground2,1.);
     
     // We want to return whichever one is closest to the ray, so we return the 
     // minimum distance.
     return smin(b,ground, 1.);
+}
+
+vec3 getNormal(in vec3 p)
+{
+    vec3 eps = vec3(0.001, 0, 0); 
+    float nx = scene(p + eps.xyy) - scene(p - eps.xyy); 
+    float ny = scene(p + eps.yxy) - scene(p - eps.yxy); 
+    float nz = scene(p + eps.yyx) - scene(p - eps.yyx); 
+    return normalize(vec3(nx,ny,nz)); 
+}
+
+
+vec3 getLighting(vec3 p){
+
+    vec3 lightPos = vec3(sin(u_time) +1. ,sin(u_time * 1.) +1.,1);
+    
+    float mag = dot(getNormal(p), lightPos);
+    
+    return vec3(mag) ;
+
 }
 vec4 trace (vec3 origin, vec3 direction){
     
@@ -134,7 +155,7 @@ vec4 trace (vec3 origin, vec3 direction){
         if (dist < smallNumber){
             // return the distance the ray had to travel normalized so be white
             // at the front and black in the back.
-            return 1. - (vec4(totalDistance) / maxDist);
+            return getLighting(positionOnRay).xyzz ;//1. - (vec4(totalDistance) / maxDist);
  
         }
         

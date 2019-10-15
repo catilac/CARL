@@ -63,6 +63,6 @@ MON Get Aframe working with a shader rendering over camera feed <br />
 TUE take a break & email the dance krew we are sharing the space with <br />
 WED fix coordinate system and connect editor code to concert code! <br />
 THR do stuff with audio <br />
-FRI test it out & get funky! <br />
+FRI test it out & get funky! yaaay :) <br />
 
 ## RESOURCES
