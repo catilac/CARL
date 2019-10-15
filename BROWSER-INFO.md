@@ -5,7 +5,10 @@
   - safari: rotations do not work, but video does (LOL AR SIMULATOR)
   - chrome: just does not work...might need to double check
 
-## iPhone 7? (char update this plz)
-  - firefox: ? 
-  - safari: ?
-  - chrome: ?
+## iPhone 8  
+  - firefox: camera feed doesnt work but everything else does
+  - safari: works!
+  - chrome: doesnt work
+  
+  
+  
