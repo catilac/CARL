@@ -26,29 +26,21 @@ app.get("/editor", function(request, response) {
   response.sendFile(__dirname + "/views/editor.html");
 });
 
-app.get("/concert", function(request, response) {
-  response.sendFile(__dirname + "/views/concert.html");
-});
+app.get("/current_code_debug", function(request, response) {
+  response.send({_code});
+})
 
-const connections = {};
+
+let _code = undefined;
 
 io.on("connection", function(socket) {
-  socket.on("added user", function(username) {
-    // lets not worry about unique usernames...
-    console.log(`added user:  ${username}`);
-    const guid = username + +new Date();
-    connections[guid] = { guid };
-    socket.send(connections[guid]);
-  });
 
-  socket.on("livecode-enter", function(guid) {
-    console.log("livecode-enter + ", guid);
-  });
-  
-  socket.on("livecode-update", function(guid, code) {
-    console.log("CODE UPDATE:", guid, code);
+  socket.on("livecode-update", function(code) {
+    console.log("CODE UPDATE:",  code);
     // save the code here
-    connections[guid]['code'] = code;
+    _code = code;
+    
+    // broadcast the code too
   })
 
   socket.on("disconnect", function() {

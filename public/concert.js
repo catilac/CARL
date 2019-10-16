@@ -9,7 +9,6 @@ var material;
 var mesh;
 var feed;
 
-var caurl_id;
 var socket;
 
 var _fragmentShader = `      
@@ -242,6 +241,8 @@ function updateScene() {
 }
 
 function init() {
+  
+  socket = io();
     
   container = document.getElementById( 'container' );
   

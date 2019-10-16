@@ -11,7 +11,6 @@ var geometry;
 var material;
 var mesh;
 
-var caurl_id;
 var socket;
 
 var _fragmentShader = `      
@@ -76,15 +75,13 @@ function updateScene() {
   scene.add( mesh );
     
     // if we get here, send the code over the wire
-  socket.emit('livecode-update', caurl_id, fragmentShader());
+  socket.emit('livecode-update', fragmentShader());
 }
 
 function init() {
   
   // SOCKET IO
   socket = io();
-  caurl_id = window.localStorage.getItem('caurlUID');
-  socket.emit('livecode-enter', caurl_id);
   
   container = document.getElementById( 'container' );
   
