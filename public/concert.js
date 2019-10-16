@@ -243,7 +243,9 @@ function updateScene() {
 function init() {
   
   socket = io();
-  socket.on('code', console.log);
+  socket.on('code', function(shaderCode) {
+    _fragmentShader = shaderCode;
+  });
     
   container = document.getElementById( 'container' );
   
