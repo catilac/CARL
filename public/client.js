@@ -1,3 +1,14 @@
+/*
+  * *&&& 
+  DEPRECATED 
+     - Chirag 10/16/2019
+  ***/
+
+
+
+
+
+
 // client-side js
 // run by the browser each time your view template is loaded
 

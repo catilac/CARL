@@ -51,6 +51,13 @@ https://glitch.com/edit/#!/join/cfb261e1-16fc-481e-847c-9f6a8a59c2d8
 [🎃] Make changes to the htmleditor
   - [🌝]live coding action
   - [🕸]send the shader code to the server
+  
+  notes:
+ * remove concept of users and assume single computer will edit shader
+ * remove registration page
+ * concert needs to subscribe and print out updates
+ * update the actual shader
+  
 
 
 
