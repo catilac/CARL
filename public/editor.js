@@ -65,8 +65,8 @@ function updateScene() {
       fragmentShader: fragmentShader()
     } );
     
-       // if we get here, send the code over the wire
-  socket.emit('livecode-update', fragmentShader());
+     // if we get here, send the code over the wire
+    socket.emit('livecode-update', fragmentShader());
     
   } catch (e) {
     console.log(e);
