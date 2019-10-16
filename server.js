@@ -41,6 +41,7 @@ io.on("connection", function(socket) {
     _code = code;
     
     // broadcast the code too
+    socket.broadcast.emit('code', _code);
   })
 
   socket.on("disconnect", function() {

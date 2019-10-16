@@ -243,6 +243,7 @@ function updateScene() {
 function init() {
   
   socket = io();
+  socket.on('code', console.log);
     
   container = document.getElementById( 'container' );
   
