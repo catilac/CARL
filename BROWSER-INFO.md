@@ -10,5 +10,9 @@
   - safari: works!
   - chrome: doesnt work
   
+## pixel 2 XL
+  - firefox: perfect
+  - chrome: perfect
+  
   
   
