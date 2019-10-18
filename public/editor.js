@@ -105,7 +105,6 @@ function init() {
   renderer.setPixelRatio( window.devicePixelRatio );
   
   gl = renderer.getContext();
-  debugger;
   
   container.appendChild( renderer.domElement );
   
