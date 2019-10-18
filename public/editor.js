@@ -57,6 +57,14 @@ function updateShader(fragmentCode) {
 }
 
 function updateScene() {
+  
+  if (gl) {
+    if (! checkFragmentShader()) {
+      return;
+    }
+  }
+
+  
   scene = new THREE.Scene();
   geometry = new THREE.PlaneBufferGeometry( 2, 2 );
   
@@ -105,7 +113,7 @@ function init() {
   renderer.setPixelRatio( window.devicePixelRatio );
   
   gl = renderer.getContext();
-  debugger;
+  
   container.appendChild( renderer.domElement );
   
   onWindowResize();
@@ -140,4 +148,15 @@ function vertexShader() {
 
 function fragmentShader() {
   return _fragmentShader;
+}
+
+function checkFragmentShader() {
+  if (gl) {
+    let shader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(shader, fragmentShader());
+    gl.compileShader(shader);
+    
+    return gl.getShaderParameter( shader, gl.COMPILE_STATUS )
+  }
+  return false;
 }
