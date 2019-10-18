@@ -60,7 +60,14 @@ function updateShader(fragmentCode) {
   
   console.log("did update");
   _fragmentShader = fragmentCode;
+
+  sendCodeOverWire();
+  
   isDirty = true;
+}
+
+function sendCodeOverWire() {
+  socket.emit('livecode-update', fragmentShader());
 }
 
 function updateScene() {
@@ -75,8 +82,7 @@ function updateScene() {
       fragmentShader: fragmentShader()
     } );
     
-     // if we get here, send the code over the wire
-    socket.emit('livecode-update', fragmentShader());
+
     
   } catch (e) {
     console.log("MY ERROR", e);
@@ -164,7 +170,7 @@ function checkFragmentShader(shaderCode) {
 
   let result = gl.getShaderParameter( shader, gl.COMPILE_STATUS );
   if (! result)
-    console.error(gl.getShaderInfoLog(shader));
+    console.log(gl.getShaderInfoLog(shader));
 
   return result;
 }

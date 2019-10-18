@@ -11,6 +11,8 @@ var feed;
 
 var socket;
 
+var needsUpdate = true;
+
 var _fragmentShader = `      
 
 
@@ -245,6 +247,7 @@ function init() {
   socket = io();
   socket.on('code', function(shaderCode) {
     _fragmentShader = shaderCode;
+    needsUpdate = true;
   });
     
   container = document.getElementById( 'container' );
@@ -288,7 +291,11 @@ function animate() {
 }
 
 function render() {
-  updateScene();
+  if (needsUpdate) {
+    updateScene();
+    needsUpdate = false;
+  }
+
   uniforms.u_time.value += 0.05;
   
   // update camera position
