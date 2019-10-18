@@ -15,6 +15,8 @@ var mesh;
 
 var socket;
 
+var shaderDirtyFlag = true;
+
 var _fragmentShader = `      
 #ifdef GL_ES
   precision mediump float;
@@ -52,6 +54,7 @@ function onEdit() {
 }
 
 function updateShader(fragmentCode) {
+  
   console.log("did update");
   _fragmentShader = fragmentCode;
 }
@@ -154,11 +157,12 @@ function checkFragmentShader() {
   let result = true;
   if (gl) {
     let shader = gl.createShader(gl.VERTEX_SHADER);
-    
     gl.shaderSource(shader, fragmentShader());
     gl.compileShader(shader);
+    
     result = gl.getShaderParameter( shader, gl.COMPILE_STATUS );
-    console.log(gl.getShaderInfoLog(shader));
+    if (! result)
+      console.log(gl.getShaderInfoLog(shader));
   }
   return result;
 }
