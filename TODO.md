@@ -26,7 +26,7 @@ https://glitch.com/edit/#!/join/cfb261e1-16fc-481e-847c-9f6a8a59c2d8
 [🕸]! Make sure editor is reflective of what is happening on people's cameras...or something <br />
   - I'm thinking about u_camPos and how we use that<br />
   
-[🕸] which mobile browsers do and don't work. Androiddd<br />
+[🌝] which mobile browsers do and don't work. Androiddd<br />
   - check and update BROWSER-INFO.md 
   
 [🕸] Explore some of the creative possibilities once the tech is feeling stable<br />

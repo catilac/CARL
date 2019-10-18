@@ -47,7 +47,4 @@ button.addEventListener('click', function (e) {
 
 function start() {
 
-  // flip.addEventListener('click', function (e) {
-  //   camera.flip();
-  // });
 }
