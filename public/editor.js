@@ -4,6 +4,8 @@ var camera, scene, renderer;
 var uniforms;
 var editor;
 
+var gl;
+
 var codemirror;
 
 // meow globals
@@ -101,6 +103,9 @@ function init() {
   
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio( window.devicePixelRatio );
+  
+  gl = renderer.getContext();
+  debugger;
   
   container.appendChild( renderer.domElement );
   
