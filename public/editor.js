@@ -69,7 +69,7 @@ function updateScene() {
     socket.emit('livecode-update', fragmentShader());
     
   } catch (e) {
-    console.log(e);
+    console.log("MY ERROR", e);
     return;
   }
   
