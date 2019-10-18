@@ -151,16 +151,13 @@ function fragmentShader() {
 }
 
 function checkFragmentShader() {
-  let result = false;
+  let result = true;
   if (gl) {
     let shader = gl.createShader(gl.VERTEX_SHADER);
-    
-    console.log(fragmentShader())
     
     gl.shaderSource(shader, fragmentShader());
     gl.compileShader(shader);
     result = gl.getShaderParameter( shader, gl.COMPILE_STATUS );
-    console.log("DEBUG:", result);
     console.log(gl.getShaderInfoLog(shader));
   }
   return result;
