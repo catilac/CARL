@@ -15,7 +15,7 @@ var mesh;
 
 var socket;
 
-var shaderDirtyFlag = true;
+var isDirty = false;
 
 var _fragmentShader = `      
 #ifdef GL_ES
@@ -54,19 +54,16 @@ function onEdit() {
 }
 
 function updateShader(fragmentCode) {
+  if (!checkFragmentShader(fragmentCode)) {
+    return;
+  }
   
   console.log("did update");
   _fragmentShader = fragmentCode;
+  isDirty = true;
 }
 
 function updateScene() {
-  
-  if (gl) {
-    if (! checkFragmentShader()) {
-      return;
-    }
-  }
-
   
   scene = new THREE.Scene();
   geometry = new THREE.PlaneBufferGeometry( 2, 2 );
@@ -88,6 +85,8 @@ function updateScene() {
   
   mesh = new THREE.Mesh( geometry, material );
   scene.add( mesh );
+  
+  shaderDirtyFlag = false;
 }
 
 function init() {
@@ -135,7 +134,9 @@ function animate() {
 }
 
 function render() {
-  updateScene();
+  if (isDirty) {
+    updateScene();
+  }
   uniforms.u_time.value += 0.05;
   renderer.render( scene, camera );
 }
@@ -153,16 +154,17 @@ function fragmentShader() {
   return _fragmentShader;
 }
 
-function checkFragmentShader() {
-  let result = true;
-  if (gl) {
-    let shader = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(shader, fragmentShader());
-    gl.compileShader(shader);
-    
-    result = gl.getShaderParameter( shader, gl.COMPILE_STATUS );
-    if (! result)
-      console.log(gl.getShaderInfoLog(shader));
-  }
+
+// this returns false if the fragment shader cannot compile
+// true if it can
+function checkFragmentShader(shaderCode) {
+  let shader = gl.createShader(gl.FRAGMENT_SHADER);
+  gl.shaderSource(shader, shaderCode);
+  gl.compileShader(shader);
+
+  let result = gl.getShaderParameter( shader, gl.COMPILE_STATUS );
+  if (! result)
+    console.error(gl.getShaderInfoLog(shader));
+
   return result;
 }
