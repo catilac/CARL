@@ -1,6 +1,6 @@
 
 var container;
-var camera, scene, renderer;
+var _camera, scene, renderer;
 var uniforms;
 var editor;
 
@@ -106,8 +106,8 @@ function init() {
   
   initEditor();
 
-  camera = new THREE.Camera();
-  camera.position.z = 1;
+  _camera = new THREE.Camera();
+  _camera.position.z = 1;
 
   uniforms = {
     u_time: { type: "f", value: 1.0 },
@@ -146,7 +146,7 @@ function render() {
     updateScene();
   }
   uniforms.u_time.value += 0.05;
-  renderer.render( scene, camera );
+  renderer.render( scene, _camera );
 }
 
 

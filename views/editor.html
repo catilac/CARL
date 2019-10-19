@@ -5,16 +5,24 @@
     <meta charset="UTF-8">
     <title>🧙</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="js/codemirror/codemirror.js"></script>
     <link rel="stylesheet" href="js/codemirror/codemirror.css">
+    
+    <script src="js/codemirror/codemirror.js"></script>
     <script src="js/codemirror/mode/clike.js"></script>
+    
+    <script src="camera.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="editor.js" defer></script>
   </head>
 
   <body>
     <div id="container"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
-   <script src="/socket.io/socket.io.js"></script>
-    <script src="editor.js"></script>
+    
+    <div class="app">
+      <div class="vidholder"></div>
+      <button>start</button>      
+    </div>
   </body>
 
 </html>
