@@ -1,6 +1,6 @@
 
 var container;
-var _camera, scene, renderer;
+var threeCam, scene, renderer;
 var uniforms;
 var editor;
 
@@ -106,15 +106,18 @@ function init() {
   
   initEditor();
 
-  _camera = new THREE.Camera();
-  _camera.position.z = 1;
+  threeCam = new THREE.Camera();
+  threeCam.position.z = 1;
+  
+  video = document.querySelector( 'video' );
+  feed = new THREE.VideoTexture( video );
 
-  uniforms = {
+  uniforms = {    
     u_time: { type: "f", value: 1.0 },
     u_resolution: { type: "v2", value: new THREE.Vector2() },
-    u_mouse: { type: "v2", value: new THREE.Vector2() }
-    
-    // add camera orientation to this?
+    u_mouse: { type: "v2", value: new THREE.Vector2() },
+    u_camRot: {type: "v3", value: new THREE.Vector3() },
+    u_feed: {type: "", value: new THREE.VideoTexture(video)}
   };
   
   updateScene();
@@ -146,7 +149,8 @@ function render() {
     updateScene();
   }
   uniforms.u_time.value += 0.05;
-  renderer.render( scene, _camera );
+  uniforms.u_feed.value = feed;
+  renderer.render( scene, threeCam );
 }
 
 
