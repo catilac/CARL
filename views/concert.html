@@ -10,6 +10,9 @@
 
         <title>CAURL</title>
         <meta name="description" content="Code AUgmented Reality Live">
+      
+      
+      
           <script>
 
     var neverBeenClicked=true;
@@ -27,8 +30,10 @@
       }
 
     function _askDeviceMotion() {
+      
       document.querySelector('#contentLayer').style.display='block';
       askDeviceMotion(argFunc)
+      alert('alright')
     }
 
 function askDeviceMotion(funcArg) {
@@ -50,6 +55,7 @@ function askDeviceMotion(funcArg) {
         grantedDeviceMotion(funcArg)
       }
     } catch (oops) {
+      alert('alright')
       console.log('Your device and application combination do not support device motion events.')
     }
   }
@@ -61,14 +67,13 @@ function grantedDeviceMotion(funcArg) {
     false
   );
 }
-
-
+_askDeviceMotion()
     </script>
       
         <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
         <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
     </head>
-  <a href='#' onclick="_askDeviceMotion()">Click me PLEASE</a><br/>
+
     <body>
       <div id="container"></div>
       <script src="concert.js" defer></script>
@@ -87,10 +92,6 @@ function grantedDeviceMotion(funcArg) {
     
       <pre></pre>
 
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js"></script>
   </body>
       
 </html>
