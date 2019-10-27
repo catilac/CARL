@@ -34,7 +34,7 @@
 
     function _askDeviceMotion() {
       
-      document.querySelector('#contentLayer').style.display='block';
+      // document.querySelector('#contentLayer').style.display='block';
       askDeviceMotion(argFunc)
       alert('alright')
     }
@@ -50,6 +50,8 @@ function askDeviceMotion(funcArg) {
             if (response === 'granted') {
               grantedDeviceMotion(funcArg)
             }else{
+              alert('Device Motion permission not granted.')
+
               console.log('Device Motion permission not granted.')
             }
           })
@@ -78,7 +80,6 @@ _askDeviceMotion()
 
     <body>
       <div id="container"></div>
-      <script src="concert.js" defer></script>
 
 
       <div class="app">
@@ -95,6 +96,7 @@ _askDeviceMotion()
       <pre></pre>
 
   </body>
-      
+            <script src="concert.js" defer></script>
+
 </html>
 
