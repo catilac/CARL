@@ -39,6 +39,8 @@ https://glitch.com/edit/#!/join/cfb261e1-16fc-481e-847c-9f6a8a59c2d8
 [🌝] replace [AR](https://github.com/jeromeetienne/AR.js)  with something more bare bones<br />
 [🌝] Add Three.js<br />
 [🌝] Add [html editor](https://github.com/mrdoob/htmleditor) from Mr.doob <br />
+[🌝] fix initial update shader bug<br />
+[🎃] fix orientation bug <br />
 
 ### Chirag
 [🌝] Create a way to have multiple live coders <br />
