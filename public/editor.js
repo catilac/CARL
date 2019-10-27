@@ -231,6 +231,7 @@ function initEditor() {
   });
   
   codemirror.on('change', onEdit);
+  onEdit();
 
 }
 

@@ -245,6 +245,7 @@ function updateScene() {
 function init() {
   
   socket = io();
+  needsUpdate = true;
   socket.on('code', function(shaderCode) {
     _fragmentShader = shaderCode;
     needsUpdate = true;
