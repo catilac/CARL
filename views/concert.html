@@ -24,7 +24,9 @@
 
     function _askDeviceMotion() {
       document.querySelector('#contentLayer').style.display='block';
+      alert("wadshat")
       askDeviceMotion(argFunc)
+      alert("what")
     }
 
 function askDeviceMotion(funcArg) {
@@ -58,14 +60,14 @@ function grantedDeviceMotion(funcArg) {
   );
 }
 
-_askDeviceMotion()
+//_askDeviceMotion()
     </script>
     <style>
     #overlay{
       z-index: 1000;
       width:100vw;
       height: 100vh;
-      background-color: rbga(234,2,2,0.7);
+      background-color: rbga(234,2,2,0.8);
     }
     #contentLayer{
       z-index: 100;
@@ -74,13 +76,10 @@ _askDeviceMotion()
     </style>
   </head>
   <body>
-<!--     <div id="overlay" style="z-index:999;font-size:36px;padding:24px;">
+    <div id="overlay" style="z-index:999;font-size:36px;padding:24px;">
       <a href='#' onclick="_askDeviceMotion()">Click me PLEASE</a><br/>
-
     </br/>
-      <a href="https://aframe.io/aframe/examples/showcase/spheres-and-fog">TESTER</a>
-
-    </div> -->
+    </div>
     <div id="contentLayer">
       <a-scene background="color: #AAB" fog="type: linear; color: #AAB; far: 30; near: 0">
         <a-assets>
