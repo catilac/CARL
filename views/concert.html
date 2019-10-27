@@ -6,7 +6,10 @@
         <script src="camera.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
         <script src="/socket.io/socket.io.js" defer></script>
-      
+<!--         <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
+          <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@fb322bc51e38272b3afa927a293c5844bdc3782c/dist/aframe-master.min.js"></script>
+
+        <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
 
         <title>CAURL</title>
         <meta name="description" content="Code AUgmented Reality Live">
@@ -50,12 +53,12 @@ function askDeviceMotion(funcArg) {
               console.log('Device Motion permission not granted.')
             }
           })
-          .catch(console.error)
+          .catch(console.error )
       } else {
         grantedDeviceMotion(funcArg)
       }
     } catch (oops) {
-      alert('alright')
+      alert('Your device and application combination do not support device motion events.')
       console.log('Your device and application combination do not support device motion events.')
     }
   }
@@ -70,8 +73,7 @@ function grantedDeviceMotion(funcArg) {
 _askDeviceMotion()
     </script>
       
-        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-        <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
     </head>
 
     <body>

@@ -229,7 +229,6 @@ function updateScene() {
       fragmentShader: fragmentShader()
     } );
     
-    
   } catch (e) {
     console.log(e);
     return;
