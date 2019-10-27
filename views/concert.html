@@ -10,6 +10,61 @@
 
         <title>CAURL</title>
         <meta name="description" content="Code AUgmented Reality Live">
+          <script>
+
+    var neverBeenClicked=true;
+
+    const argFunc = function(){
+      if(neverBeenClicked === true){
+        neverBeenClicked = false;
+        alert('One alert')
+      }
+    }
+
+    function aoskDeviceMotion() {
+      document.querySelector('#overlay').addEventListener(
+        'click', _askDeviceMotion, false);
+      }
+
+    function _askDeviceMotion() {
+      document.querySelector('#contentLayer').style.display='block';
+      askDeviceMotion(argFunc)
+    }
+
+function askDeviceMotion(funcArg) {
+  try {
+      if (
+        DeviceMotionEvent &&
+        typeof DeviceMotionEvent.requestPermission === 'function'
+      ){
+        DeviceMotionEvent.requestPermission().then(
+          response => {
+            if (response === 'granted') {
+              grantedDeviceMotion(funcArg)
+            }else{
+              console.log('Device Motion permission not granted.')
+            }
+          })
+          .catch(console.error)
+      } else {
+        grantedDeviceMotion(funcArg)
+      }
+    } catch (oops) {
+      console.log('Your device and application combination do not support device motion events.')
+    }
+  }
+
+function grantedDeviceMotion(funcArg) {
+  window.addEventListener(
+    'devicemotion',
+    funcArg,
+    false
+  );
+}
+
+
+    </script>
+      
         <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
         <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
     </head>
