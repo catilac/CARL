@@ -2,7 +2,6 @@
 
     <head>
           <meta name="viewport" content="width=device-width, initial-scale=1">
-    
         <script src="camera.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
         <script src="/socket.io/socket.io.js" defer></script>
@@ -76,7 +75,6 @@ function grantedDeviceMotion(funcArg) {
     <body>
       <div id="container"></div>
 
-
       <div class="app">
         <div class="vidholder"></div>
         <button>start</button>      
@@ -94,7 +92,10 @@ function grantedDeviceMotion(funcArg) {
   <script src="concert.js" defer></script>
   
 <script>
-  _askDeviceMotion()
+  this.lastRequest = setTimeout(() => {
+_askDeviceMotion()
+}, 1000);
+  
     </script>
 </html>
 
