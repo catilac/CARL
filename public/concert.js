@@ -211,8 +211,6 @@ void main(void)
     // This reserved variable is what we must set the final color to
     gl_FragColor = trace(camOrigin, dir);
 }
-{}
-
 `;
 
 init();
