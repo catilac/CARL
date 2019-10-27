@@ -1,25 +1,16 @@
+<!DOCTYPE html>
 <html>
-
-    <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <script src="camera.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
-        <script src="/socket.io/socket.io.js" defer></script>
-<!--         <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
-          <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@fb322bc51e38272b3afa927a293c5844bdc3782c/dist/aframe-master.min.js"></script>
-
-        <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
-
-        <title>CAURL</title>
-        <meta name="description" content="Code AUgmented Reality Live">
-      
-        <script>
+  <head>
+    <meta charset="utf-8">
+    <title>Spheres &amp; Fog</title>
+    <meta name="description" content="Spheres &amp; Fog - A-Frame">
+    <!-- master from 2019&#45;10&#45;26 -->
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@fb322bc51e38272b3afa927a293c5844bdc3782c/dist/aframe-master.min.js"></script>
+    <script>
 
     var neverBeenClicked=true;
 
     const argFunc = function(){
-      alert('asked')
       if(neverBeenClicked === true){
         neverBeenClicked = false;
         alert('One alert')
@@ -32,10 +23,8 @@
       }
 
     function _askDeviceMotion() {
-      
-      // document.querySelector('#contentLayer').style.display='block';
+      document.querySelector('#contentLayer').style.display='block';
       askDeviceMotion(argFunc)
-      alert('alright')
     }
 
 function askDeviceMotion(funcArg) {
@@ -49,17 +38,14 @@ function askDeviceMotion(funcArg) {
             if (response === 'granted') {
               grantedDeviceMotion(funcArg)
             }else{
-              alert('Device Motion permission not granted.')
-
               console.log('Device Motion permission not granted.')
             }
           })
-          .catch(console.error )
+          .catch(console.error)
       } else {
         grantedDeviceMotion(funcArg)
       }
     } catch (oops) {
-      alert('Your device and application combination do not support device motion events.')
       console.log('Your device and application combination do not support device motion events.')
     }
   }
@@ -71,44 +57,32 @@ function grantedDeviceMotion(funcArg) {
     false
   );
 }
+
 _askDeviceMotion()
     </script>
-      
-    <script src="concert.js" defer></script>
-
-    </head>
-
-    <body>
-    
-      
-    <div id="overlay" style="z-index:999;font-size:36px;padding:24px;">
-    <a href='#' onclick="_askDeviceMotion()">Click me PLEASE</a><br/>
+    <style>
+    #overlay{
+      z-index: 1000;
+      width:100vw;
+      height: 100vh;
+      background-color: rbga(234,2,2,0.7);
+    }
+    #contentLayer{
+      z-index: 100;
+      display:none;
+    }
+    </style>
+  </head>
+  <body>
+<!--     <div id="overlay" style="z-index:999;font-size:36px;padding:24px;">
+      <a href='#' onclick="_askDeviceMotion()">Click me PLEASE</a><br/>
 
     </br/>
       <a href="https://aframe.io/aframe/examples/showcase/spheres-and-fog">TESTER</a>
 
-    </div>
-      
-      
-      <div id="container"></div>
-
-
-      <div class="app">
-        <div class="vidholder"></div>
-        <button>start</button>      
-      </div>
-      
-<!--       <a-scene>
-        <a-camera
-          position="0 1 0">          
-        </a-camera>  
-      </a-scene>  -->
-     <div id="contentLayer">
+    </div> -->
+    <div id="contentLayer">
       <a-scene background="color: #AAB" fog="type: linear; color: #AAB; far: 30; near: 0">
-        
-                <a-camera
-          position="0 1 0">          
-        </a-camera>  
         <a-assets>
           <img id="highlight1" src="radial-highlight.png">
           <img id="shadow3" src="radial-shadow-3.png">
@@ -242,9 +216,5 @@ _askDeviceMotion()
         </a-entity>
       </a-scene>
     </div>
-      
-
   </body>
-
 </html>
-
