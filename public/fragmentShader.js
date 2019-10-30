@@ -90,13 +90,13 @@ float fBlob(vec3 p) {
 	p = abs(p);
 	if (p.x < max(p.y, p.z)) p = p.yzx;
 	if (p.x < max(p.y, p.z)) p = p.yzx;
-	float b = max(max(max(
-		dot(p, normalize(vec3(1, 1, 1))),
-		dot(p.xz, normalize(vec2(PHI+1, 1)))),
-		dot(p.yx, normalize(vec2(1, PHI)))),
-		dot(p.xz, normalize(vec2(1, PHI))));
-	float l = length(p);
-	return l - 1.5 - 0.2 * (1.5 / 2)* cos(min(sqrt(1.01 - b / l)*(PI / 0.25), PI));
+    float b = max(max(max(
+        dot(p, normalize(vec3(1, 1, 1))),
+        dot(p.xz, normalize(vec2(PHI+1., 1)))),
+        dot(p.yx, normalize(vec2(1., PHI)))),
+        dot(p.xz, normalize(vec2(1., PHI))));
+    float l = length(p);
+	return l - 1.5 - 0.2 * (1.5 / 2.0) * cos(min(sqrt(1.01 - b / l)*(PI / 0.25), PI));
 }
 
 
@@ -117,7 +117,7 @@ float scene(vec3 position){
     float b = fBlob(vec3(
             position.x + cos(u_time)/10., 
             position.y, 
-            position.z+ ((sin(u_time) +1. + 2.)/2.)-1.)
+            position.z+ ((sin(u_time) +1. + 2.)/2.)-7.)
         );
  
     

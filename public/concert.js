@@ -63,7 +63,6 @@ function init() {
     u_camRot: {type: "v3", value: new THREE.Vector3() },
     u_feed: {type: "", value: new THREE.VideoTexture(video)},
     u_camQuat:{type:"v4", value: new THREE.Vector4() },
-    // add camera orientation to this?
     u_camPos: {type: "v3", value: new THREE.Vector3() },
   };
   
@@ -101,11 +100,13 @@ function render() {
   var _camera = document.querySelector("a-camera");
   
   var rot = _camera.getAttribute("rotation");
-  var threeCamera = _camera.components.camera.camera;
+ // var threeCamera = _camera.components.camera.camera;
+  var threeCamera = _camera.object3D;
+  
   var quat = threeCamera.quaternion;
   var pos = threeCamera.position;
-  console.log(pos);
-  console.log(quat);
+  console.log('position: ', pos);
+  console.log('quaternion: ', quat);
   //alert(quat.x)
   
   uniforms.u_camRot.value = new THREE.Vector3(rot.x, rot.y, rot.z);
