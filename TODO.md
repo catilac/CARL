@@ -33,6 +33,8 @@ https://glitch.com/edit/#!/join/cfb261e1-16fc-481e-847c-9f6a8a59c2d8
 
 
 [🌝] oh AR <3
+
+[ ] Add a screen saying it will ask for device orientation, and camera orientation
  
 ### Char
 

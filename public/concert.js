@@ -20,6 +20,9 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 uniform vec4 u_camRot;
+uniform vec4 u_camQuat;
+uniform vec3 u_camPos;
+
 uniform sampler2D u_feed;
 #define PI 3.14159265
 #define TAU (2*PI)
@@ -261,9 +264,10 @@ function init() {
     u_resolution: { type: "v2", value: new THREE.Vector2() },
     u_mouse: { type: "v2", value: new THREE.Vector2() },
     u_camRot: {type: "v3", value: new THREE.Vector3() },
-    u_feed: {type: "", value: new THREE.VideoTexture(video)}
-    
+    u_feed: {type: "", value: new THREE.VideoTexture(video)},
+    u_camQuat:{type:"v4", value: new THREE.Vector4() },
     // add camera orientation to this?
+    u_camPos: {type: "v3", value: new THREE.Vector3() },
   };
   
   updateScene();
@@ -300,15 +304,15 @@ function render() {
   var _camera = document.querySelector("a-camera");
   
   var rot = _camera.getAttribute("rotation");
-  var quat = _camera.getAttribute("quaternion");
-  
-  // alert(quat.x)
+  var threeCamera = _camera.components.camera.camera;
+  var quat = threeCamera.quaternion;
+  var pos = threeCamera.position;
+  //alert(quat.x)
   
   uniforms.u_camRot.value = new THREE.Vector3(rot.x, rot.y, rot.z);
- // uniforms.u_camQuat.value = new THREE.Vector4(quat.x, quat.y, quat.z, quat.w);
+  uniforms.u_camQuat.value = new THREE.Vector4(quat.x, quat.y, quat.z, quat.w);
 
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
-  
   uniforms.u_feed.value = feed;
   
   renderer.render( scene, threeCam );
