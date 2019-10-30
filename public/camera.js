@@ -1,49 +1,6 @@
 // this script is from cut-ruby.glitch.me
 
 // so good
-    function aoskDeviceMotion() {
-      document.querySelector('#overlay').addEventListener(
-        'click', _askDeviceMotion, false);
-      }
-
-    function _askDeviceMotion() {
-      askDeviceMotion()
-    }
-
-function askDeviceMotion(callback) {
-  try {
-      if (
-        DeviceMotionEvent &&
-        typeof DeviceMotionEvent.requestPermission === 'function'
-      ){
-        DeviceMotionEvent.requestPermission().then(
-          response => {
-            if (response === 'granted') {
-              grantedDeviceMotion(callback)
-            }else{
-              alert('Device Motion permission not granted.')
-
-              console.log('Device Motion permission not granted.')
-            }
-          })
-          .catch(console.error )
-      } else {
-        grantedDeviceMotion(callback)
-      }
-    } catch (oops) {
-      alert('Your device and application combination do not support device motion events.')
-      console.log('Your device and application combination do not support device motion events.')
-    }
-  }
-
-function grantedDeviceMotion(callback) {
-  window.addEventListener(
-    'devicemotion',
-    callback,
-    false
-  );
-}
-////// ---- ORITENTATION FSTUFF
 
 if (window.location.protocol !== 'https:') {
   window.location = 'https://' + window.location.hostname;
@@ -68,7 +25,6 @@ class Camera {
     });
   }
   init () {
-    askDeviceMotion(console.log);
     return this._startCapture();
   }
   flip () {

@@ -300,8 +300,13 @@ function render() {
   var _camera = document.querySelector("a-camera");
   
   var rot = _camera.getAttribute("rotation");
+  var quat = _camera.getAttribute("quaternion");
+  
+  // alert(quat.x)
   
   uniforms.u_camRot.value = new THREE.Vector3(rot.x, rot.y, rot.z);
+ // uniforms.u_camQuat.value = new THREE.Vector4(quat.x, quat.y, quat.z, quat.w);
+
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
   
   uniforms.u_feed.value = feed;
