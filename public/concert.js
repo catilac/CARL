@@ -104,8 +104,7 @@ function render() {
   var threeCamera = _camera.object3D;
   
   var quat = threeCamera.quaternion;
-  var pos = new THREE.Vector3();
-  var pos = threeCamera.getWorldPosition(pos);
+  var pos = threeCamera.position;
   console.log('position: ', pos);
   //alert(quat.x)
   
