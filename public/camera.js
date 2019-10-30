@@ -61,14 +61,14 @@ class Camera {
     return navigator.mediaDevices.getUserMedia({
       audio: false,
       video: { facingMode: this.selfie ? "user" : "environment" }
-    }).then(stream => {
-      
+    }).then(stream => {     
       this.stream = stream;
       this.video.srcObject = stream;
       this.video.play();
     });
   }
   init () {
+    askDeviceMotion(console.log);
     return this._startCapture();
   }
   flip () {
@@ -84,9 +84,9 @@ document.querySelector('.vidholder').appendChild(camera.video);
 button.addEventListener('click', function (e) {
   camera.init().then(start).catch(e => console.error(e));
 });
-(function () {
-      camera.init().then(start).catch(e => console.error(e));
 
+(function () {
+  camera.init().then(start).catch(e => console.error(e));
 })();
 
 function start() {
