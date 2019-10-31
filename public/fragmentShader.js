@@ -122,7 +122,7 @@ float scene(vec3 position){
         );
  
     
-    float ground = (position.y) + sin(position.x * 10.) / 10. 
+    float ground = (position.y) + sin(position.x * 10.) / (10. * (1.0-u_vol))
                               + cos(position.z * 10.) / 10. + 1.;
     float ground2 = -(position.y) + sin(position.x * 10.) / 10. 
                               - cos(position.z * 10.) / 10. + 1.;

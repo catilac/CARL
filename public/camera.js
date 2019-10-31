@@ -18,13 +18,15 @@ class Camera {
     return navigator.mediaDevices.getUserMedia({
       audio: true,
       video: { facingMode: this.selfie ? "user" : "environment" }
-    }).then(stream => {     
+    }).then(stream => {
+      
+      alert("HI");
+      
       this.stream = stream;
       this.video.srcObject = stream;
       this.video.play();
       
       const audioTracks = stream.getAudioTracks();
-      console.log("DEBUG: ", audioTracks);
       this.audio.srcObject = stream
       
     });
@@ -41,7 +43,6 @@ class Camera {
 let button = document.querySelector("button");
 let camera = new Camera();
 document.querySelector('.vidholder').appendChild(camera.video);
-document.querySelector('.audioholder').appendChild(camera.audio);
 
 button.addEventListener('click', function (e) {
   camera.init().then(start).catch(e => console.error(e));
