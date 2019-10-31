@@ -153,6 +153,7 @@ function fragmentShader() {
 // this returns false if the fragment shader cannot compile
 // true if it can
 function checkFragmentShader(shaderCode) {
+  if (!gl) { return }
   let shader = gl.createShader(gl.FRAGMENT_SHADER);
   gl.shaderSource(shader, shaderCode);
   gl.compileShader(shader);
