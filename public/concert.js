@@ -9,7 +9,6 @@ var material;
 var mesh;
 var feed;
 var analyser;
-var FFT_SIZE = 512;
 
 var socket;
 
@@ -40,16 +39,7 @@ function updateScene() {
   scene.add( mesh );
     
 }
-// from here https://hackernoon.com/creative-coding-using-the-microphone-to-make-sound-reactive-art-part1-164fd3d972f3
-// A more accurate way to get overall volume
-this.getRMS = function (spectrum) {var rms = 0;
-  for (var i = 0; i < vols.length; i++) {
-    rms += spectrum[i] * spectrum[i];
-  }
-  rms /= spectrum.length;
-  rms = Math.sqrt(rms);
-  return rms;
- }
+
 
 function init() {
   
@@ -67,18 +57,7 @@ function init() {
   
   video = document.querySelector( 'video' );
   
-  
-  analyser = context.createAnalyser();
-  analyser.smoothingTimeConstant = 0.2;
-  analyser.fftSize = FFT_SIZE;     
-  var node = context.createScriptProcessor(FFT_SIZE*2, 1, 1);     
-  node.onaudioprocess = function () {       // bitcount returns array which is half the FFT_SIZE
-    self.spectrum = new Uint8Array(analyser.frequencyBinCount);       // getByteFrequencyData returns amplitude for each bin
-    analyser.getByteFrequencyData(self.spectrum);
-         // getByteTimeDomainData gets volumes over the sample time
-         // analyser.getByteTimeDomainData(self.spectrum);
-    self.vol = self.getRMS(self.spectrum);
-  }
+
   
   feed = new THREE.VideoTexture( video );
   
@@ -132,11 +111,14 @@ function render() {
   
   var quat = threeCamera.quaternion;
   var pos = _camera.getAttribute("position");
-  console.log('position: ', pos);
+  // console.log('position: ', pos);
   //alert(quat.x)
   
   uniforms.u_camRot.value = new THREE.Vector3(rot.x, rot.y, rot.z);
   uniforms.u_camQuat.value = new THREE.Vector4(quat.x, quat.y, quat.z, quat.w);
+  uniforms.u_vol = vol;
+  
+  console.log(vol);
 
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
   uniforms.u_feed.value = feed;

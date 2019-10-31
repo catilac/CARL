@@ -1,9 +1,22 @@
 // this script is from cut-ruby.glitch.me
 
 // so good
-
+var FFT_SIZE = 512;
+var vol;
 if (window.location.protocol !== 'https:') {
   window.location = 'https://' + window.location.hostname;
+}
+
+// from here https://hackernoon.com/creative-coding-using-the-microphone-to-make-sound-reactive-art-part1-164fd3d972f3
+// A more accurate way to get overall volume
+function getRMS (spectrum) {
+  var rms = 0;
+  for (var i = 0; i < spectrum.length; i++) {
+    rms += spectrum[i] * spectrum[i];
+  }
+  rms /= spectrum.length;
+  rms = Math.sqrt(rms);
+  return rms;
 }
 
 class Camera {
@@ -27,6 +40,23 @@ class Camera {
       
       const audioTracks = stream.getAudioTracks();
       this.audio.srcObject = stream
+      
+        var analyser = context.createAnalyser();
+    analyser.smoothingTimeConstant = 0.2;
+    analyser.fftSize = FFT_SIZE;     
+    var node = context.createScriptProcessor(FFT_SIZE*2, 1, 1);     
+    node.onaudioprocess = function () {       // bitcount returns array which is half the FFT_SIZE
+    self.spectrum = new Uint8Array(analyser.frequencyBinCount);       // getByteFrequencyData returns amplitude for each bin
+    analyser.getByteFrequencyData(self.spectrum);
+         // getByteTimeDomainData gets volumes over the sample time
+         // analyser.getByteTimeDomainData(self.spectrum);
+    vol = getRMS(self.spectrum);
+    }
+      
+     var input = context.createMediaStreamSource(stream);
+     input.connect(analyser);
+     analyser.connect(node);
+     node.connect(context.destination);
       
     });
   }
