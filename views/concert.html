@@ -1,19 +1,34 @@
 <html>
 
     <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="camera.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
-        <script src="/socket.io/socket.io.js" defer></script>
-<!--         <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
-          <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@fb322bc51e38272b3afa927a293c5844bdc3782c/dist/aframe-master.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Code AUgmented Reality Live">
+        
+      <title>CAURL</title>
 
-        <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+      <script src="camera.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
+      <script src="/socket.io/socket.io.js" defer></script>
+      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@fb322bc51e38272b3afa927a293c5844bdc3782c/dist/aframe-master.min.js"></script>
 
-        <title>CAURL</title>
-        <meta name="description" content="Code AUgmented Reality Live">
-      
-        <script>
+      <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+
+
+      <script>
+          
+          AFRAME.registerComponent('rotation-reader', {
+  tick: function () {
+    // `this.el` is the element.
+    // `object3D` is the three.js object.
+
+    // `rotation` is a three.js Euler using radians. `quaternion` also available.
+    // console.log(this.el.object3D.rotation);
+
+    // `position` is a three.js Vector3.
+    console.log(this.el.object3D.position);
+  }
+});
 
     var neverBeenClicked=true;
 
@@ -79,7 +94,7 @@ function grantedDeviceMotion(funcArg) {
       </div>
       
       <a-scene>
-        <a-camera>          
+        <a-camera rotation-reader>          
         </a-camera>          
       </a-scene> 
     
