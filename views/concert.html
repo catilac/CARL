@@ -1,21 +1,19 @@
 <html>
 
     <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="Code AUgmented Reality Live">
-        
-      <title>CAURL</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="camera.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
+        <script src="/socket.io/socket.io.js" defer></script>
+<!--         <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
+          <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@fb322bc51e38272b3afa927a293c5844bdc3782c/dist/aframe-master.min.js"></script>
 
-      <script src="camera.js" defer></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js" defer></script>
-      <script src="/socket.io/socket.io.js" defer></script>
-      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@fb322bc51e38272b3afa927a293c5844bdc3782c/dist/aframe-master.min.js"></script>
+        <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
 
-      <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
-
-
-
-      <script>
+        <title>CAURL</title>
+        <meta name="description" content="Code AUgmented Reality Live">
+      
+        <script>
 
     var neverBeenClicked=true;
 
@@ -81,10 +79,8 @@ function grantedDeviceMotion(funcArg) {
       </div>
       
       <a-scene>
-<!--         <a-camera rotation-reader>          
-        </a-camera>           -->
-        
-        <a-entity camera rotation-reader></a-entity>
+        <a-camera>          
+        </a-camera>          
       </a-scene> 
     
       <pre></pre>

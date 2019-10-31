@@ -41,19 +41,6 @@ function updateScene() {
 
 function init() {
   
-            AFRAME.registerComponent('rotation-reader', {
-  tick: function () {
-    // `this.el` is the element.
-    // `object3D` is the three.js object.
-
-    // `rotation` is a three.js Euler using radians. `quaternion` also available.
-    console.log('quat: ', this.el.object3D.quaternion);
-
-    // `position` is a three.js Vector3.
-    console.log('pos: ', this.el.object3D.position);
-  }
-});
-  
   socket = io();
   needsUpdate = true;
   socket.on('code', function(shaderCode) {
@@ -110,8 +97,7 @@ function render() {
   uniforms.u_time.value += 0.05;
   
   // update camera position
-  // var _camera = document.querySelector("a-camera");
-  var _camera = document.querySelector("a-entity");
+  var _camera = document.querySelector("a-camera");
   
   var rot = _camera.getAttribute("rotation");
  // var threeCamera = _camera.components.camera.camera;
@@ -119,7 +105,7 @@ function render() {
   
   var quat = threeCamera.quaternion;
   var pos = _camera.getAttribute("position");
-  // console.log('position: ', pos);
+  console.log('position: ', pos);
   //alert(quat.x)
   
   uniforms.u_camRot.value = new THREE.Vector3(rot.x, rot.y, rot.z);
