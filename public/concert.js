@@ -73,11 +73,12 @@ function init() {
   analyser.fftSize = FFT_SIZE;     
   var node = context.createScriptProcessor(FFT_SIZE*2, 1, 1);     
   node.onaudioprocess = function () {       // bitcount returns array which is half the FFT_SIZE
-  self.spectrum = new Uint8Array(analyser.frequencyBinCount);       // getByteFrequencyData returns amplitude for each bin
-  analyser.getByteFrequencyData(self.spectrum);
-       // getByteTimeDomainData gets volumes over the sample time
-       // analyser.getByteTimeDomainData(self.spectrum);
-  self.vol = self.getRMS(self.spectrum);
+    self.spectrum = new Uint8Array(analyser.frequencyBinCount);       // getByteFrequencyData returns amplitude for each bin
+    analyser.getByteFrequencyData(self.spectrum);
+         // getByteTimeDomainData gets volumes over the sample time
+         // analyser.getByteTimeDomainData(self.spectrum);
+    self.vol = self.getRMS(self.spectrum);
+  }
   
   feed = new THREE.VideoTexture( video );
   

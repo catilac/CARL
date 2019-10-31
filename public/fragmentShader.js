@@ -96,7 +96,7 @@ float fBlob(vec3 p) {
         dot(p.xz, normalize(vec2(PHI+1., 1)))),
         dot(p.yx, normalize(vec2(1., PHI)))),
         dot(p.xz, normalize(vec2(1., PHI))));
-    float l = length(p);
+    float l = length(p) * sin(u_time);
 	return l - 1.5 - 0.2 * (1.5 / 2.0) * cos(min(sqrt(1.01 - b / l)*(PI / 0.25), PI));
 }
 
