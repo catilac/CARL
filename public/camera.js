@@ -20,7 +20,6 @@ class Camera {
       video: { facingMode: this.selfie ? "user" : "environment" }
     }).then(stream => {
       
-      alert("HI");
       
       this.stream = stream;
       this.video.srcObject = stream;
