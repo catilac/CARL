@@ -214,17 +214,6 @@ void main(void)
 
 
     // according to 3js docs Default order is 'XYZ'
-  
-    // dirToLook = rotateEuler(dirToLook, xAxis, radians(u_camRot.x));
-    // // so thats the first, now we need the other two axiss to be relative to this one so lets rotate them
-    // yAxis = rotateEuler(yAxis, xAxis, radians(u_camRot.x) );
-    // zAxis = rotateEuler(zAxis, xAxis, radians(u_camRot.x) );
-    // // next up is y rotation
-    // dirToLook = rotateEuler(dirToLook, yAxis, radians(u_camRot.y) );
-    // // make the z axis relative to the object again
-    // zAxis = rotateEuler(zAxis, yAxis, radians(u_camRot.y) );
-    // // finally lets rotate the z axis
-    // dirToLook = rotateEuler(dirToLook, zAxis, radians(u_camRot.z) );
 
     vec3 dir = lookAt(uv, camOrigin, dirToLook);
 

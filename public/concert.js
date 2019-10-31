@@ -104,7 +104,7 @@ function render() {
   var threeCamera = _camera.object3D;
   
   var quat = threeCamera.quaternion;
-  var pos = threeCamera.position;
+  var pos = _camera.getAttribute("position");
   console.log('position: ', pos);
   //alert(quat.x)
   
