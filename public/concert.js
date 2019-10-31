@@ -18,7 +18,6 @@ var needsUpdate = true;
 init();
 animate();
 
-
 function updateScene() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xff0000 );

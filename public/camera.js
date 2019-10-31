@@ -8,8 +8,6 @@ if (window.location.protocol !== 'https:') {
   window.location = 'https://' + window.location.hostname;
 }
 
-
-
 class Camera {
   constructor () {
     this.video = document.createElement('video');
