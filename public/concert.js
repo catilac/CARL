@@ -41,6 +41,19 @@ function updateScene() {
 }
 
 
+// from here https://hackernoon.com/creative-coding-using-the-microphone-to-make-sound-reactive-art-part1-164fd3d972f3
+// A more accurate way to get overall volume
+function getRMS (spectrum) {
+  var rms = 0;
+  for (var i = 0; i < spectrum.length; i++) {
+    rms += spectrum[i] * spectrum[i];
+  }
+  rms /= spectrum.length;
+  rms = Math.sqrt(rms);
+  let norm = rms/128.;
+  return (norm - 0.99) * 100.;
+}
+
 function init() {
   
   socket = io();
@@ -104,11 +117,13 @@ function render() {
     
     camera.analyser.getByteTimeDomainData(dataArray)
     
-    uniforms.u_vol = dataArray[0]/128.0; 
-    console.log("dataarray", dataArray[0]/128.0);
+    vol = getRMS(dataArray);
+    
+    // console.log("dataarray", dataArray[0]/128.0);
   }
   
-  uniforms.u_vol = dataArray[0]/128.0; 
+  console.log(vol);
+  uniforms.u_vol.value = vol; 
 
   uniforms.u_time.value += 0.05;
   

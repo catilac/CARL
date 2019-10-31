@@ -8,17 +8,7 @@ if (window.location.protocol !== 'https:') {
   window.location = 'https://' + window.location.hostname;
 }
 
-// from here https://hackernoon.com/creative-coding-using-the-microphone-to-make-sound-reactive-art-part1-164fd3d972f3
-// A more accurate way to get overall volume
-function getRMS (spectrum) {
-  var rms = 0;
-  for (var i = 0; i < spectrum.length; i++) {
-    rms += spectrum[i] * spectrum[i];
-  }
-  rms /= spectrum.length;
-  rms = Math.sqrt(rms);
-  return rms;
-}
+
 
 class Camera {
   constructor () {
@@ -46,7 +36,7 @@ class Camera {
       
       this.analyser = this.audioCtx.createAnalyser();
       this.analyser.smoothingTimeConstant = 0.2;
-      this.analyser.fftSize = FFT_SIZE;      
+      this.analyser.fftSize = FFT_SIZE;    
       
       source.connect(this.analyser);
     });

@@ -96,7 +96,7 @@ float fBlob(vec3 p) {
         dot(p.xz, normalize(vec2(PHI+1., 1)))),
         dot(p.yx, normalize(vec2(1., PHI)))),
         dot(p.xz, normalize(vec2(1., PHI))));
-    float l = length(p) * sin(u_time);
+    float l = length(p) ;
 	return l - 1.5 - 0.2 * (1.5 / 2.0) * cos(min(sqrt(1.01 - b / l)*(PI / 0.25), PI));
 }
 
@@ -109,21 +109,17 @@ float smin( float a, float b, float k )
 
 float scene(vec3 position){
     
-    float sphere = length(
-        vec3(
-            position.x + cos(u_time)/10., 
-            position.y, 
-            position.z+ sin(u_time) +1.)
-        )-0.5;
+  
     float b = fBlob(vec3(
-            position.x + cos(u_time)/10., 
+            position.x, 
             position.y, 
-            position.z+ ((sin(u_time) +1. + 2.)/2.)-7.)
+            position.z - 10.)
         );
  
     
-    float ground = (position.y) + sin(position.x * 10.) / (9.+ (1. * (1.0-clamp(u_vol,0.,1.0))))
+    float ground = (position.y) + sin(position.x * 10.) / (5.+ (5. * (u_vol+1. /2.)))
                               + cos(position.z * 10.) / 10. + 1.;
+
     float ground2 = -(position.y) + sin(position.x * 10.) / 10. 
                               - cos(position.z * 10.) / 10. + 1.;
                               
