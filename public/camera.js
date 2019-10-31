@@ -47,6 +47,8 @@ class Camera {
       this.analyser = this.audioCtx.createAnalyser();
       this.analyser.smoothingTimeConstant = 0.2;
       this.analyser.fftSize = FFT_SIZE;      
+      
+      source.connect(this.analyser);
     });
   }
     

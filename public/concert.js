@@ -97,13 +97,18 @@ function render() {
     needsUpdate = false;
   }
   
-  if (camera && camera.analyzer) {
+  var vol = 0.0;
+  if (camera && camera.analyser) {
     var bufferLength = camera.analyser.frequencyBinCount;
     var dataArray = new Uint8Array(bufferLength);
-    camera.analyser.getByteTimeDomainData(dataArray);
+    
+    camera.analyser.getByteTimeDomainData(dataArray)
+    
     uniforms.u_vol = dataArray[0]/128.0; 
-    console.log("dataarray", dataArray);
+    console.log("dataarray", dataArray[0]/128.0);
   }
+  
+  uniforms.u_vol = dataArray[0]/128.0; 
 
   uniforms.u_time.value += 0.05;
   
