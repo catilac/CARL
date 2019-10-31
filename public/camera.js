@@ -3,6 +3,7 @@
 // so good
 var FFT_SIZE = 512;
 var vol;
+
 if (window.location.protocol !== 'https:') {
   window.location = 'https://' + window.location.hostname;
 }
@@ -32,36 +33,46 @@ class Camera {
       audio: true,
       video: { facingMode: this.selfie ? "user" : "environment" }
     }).then(stream => {
-      
-      
       this.stream = stream;
       this.video.srcObject = stream;
       this.video.play();
       
       const audioTracks = stream.getAudioTracks();
-      this.audio.srcObject = stream
+      // this.audio.srcObject = stream
       
-        var analyser = context.createAnalyser();
-    analyser.smoothingTimeConstant = 0.2;
-    analyser.fftSize = FFT_SIZE;     
-    var node = context.createScriptProcessor(FFT_SIZE*2, 1, 1);     
-    node.onaudioprocess = function () {       // bitcount returns array which is half the FFT_SIZE
-    self.spectrum = new Uint8Array(analyser.frequencyBinCount);       // getByteFrequencyData returns amplitude for each bin
-    analyser.getByteFrequencyData(self.spectrum);
-         // getByteTimeDomainData gets volumes over the sample time
-         // analyser.getByteTimeDomainData(self.spectrum);
-    vol = getRMS(self.spectrum);
-    }
+      source = audioCtx.createMediaStreamSource(stream);
       
-     var input = context.createMediaStreamSource(stream);
-     input.connect(analyser);
-     analyser.connect(node);
-     node.connect(context.destination);
+      var analyser = context.createAnalyser();
+      analyser.smoothingTimeConstant = 0.2;
+      analyser.fftSize = FFT_SIZE;  
       
-    });
+      var bufferLength = analyser.frequencyBinCount;
+      var dataArray = new Uint8Array(bufferLength);
+      analyser.getByteTimeDomainData(dataArray);
+      
+      
+      analyser.getByteTimeDomainData(dataArray);
+     // var node = context.createScriptProcessor(FFT_SIZE*2, 1, 1);     
+      
+//       node.onaudioprocess = function () {       // bitcount returns array which is half the FFT_SIZE
+//         self.spectrum = new Uint8Array(analyser.frequencyBinCount);       // getByteFrequencyData returns amplitude for each bin
+//         analyser.getByteFrequencyData(self.spectrum);
+//              // getByteTimeDomainData gets volumes over the sample time
+//              // analyser.getByteTimeDomainData(self.spectrum);
+//         vol = getRMS(self.spectrum);
+
+//       }
+      
+//       console.log("this is vol: ", vol);
+//       var input = context.createMediaStreamSource(stream);
+//       input.connect(analyser);
+//       analyser.connect(node);
+//       node.connect(context.destination);
+//     });
   }
   init () {
     return this._startCapture();
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
   flip () {
     this.selfie = !this.selfie;

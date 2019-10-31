@@ -56,9 +56,6 @@ function init() {
   threeCam.position.z = 1;
   
   video = document.querySelector( 'video' );
-  
-
-  
   feed = new THREE.VideoTexture( video );
   
   uniforms = {
@@ -116,9 +113,9 @@ function render() {
   
   uniforms.u_camRot.value = new THREE.Vector3(rot.x, rot.y, rot.z);
   uniforms.u_camQuat.value = new THREE.Vector4(quat.x, quat.y, quat.z, quat.w);
-  uniforms.u_vol = vol;
+  uniforms.u_vol = vol || 0.0;
   
-  console.log(vol);
+  
 
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
   uniforms.u_feed.value = feed;
