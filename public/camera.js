@@ -27,7 +27,10 @@ class Camera {
     this.video.setAttribute('playsinline', true);
     
     this.selfie = false;
+    
+    this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
+  
   _startCapture() {
     return navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -38,41 +41,18 @@ class Camera {
       this.video.play();
       
       const audioTracks = stream.getAudioTracks();
-      // this.audio.srcObject = stream
       
-      source = audioCtx.createMediaStreamSource(stream);
+      var source = this.audioCtx.createMediaStreamSource(stream);
       
-      var analyser = context.createAnalyser();
-      analyser.smoothingTimeConstant = 0.2;
-      analyser.fftSize = FFT_SIZE;  
-      
-      var bufferLength = analyser.frequencyBinCount;
-      var dataArray = new Uint8Array(bufferLength);
-      analyser.getByteTimeDomainData(dataArray);
-      
-      
-      analyser.getByteTimeDomainData(dataArray);
-     // var node = context.createScriptProcessor(FFT_SIZE*2, 1, 1);     
-      
-//       node.onaudioprocess = function () {       // bitcount returns array which is half the FFT_SIZE
-//         self.spectrum = new Uint8Array(analyser.frequencyBinCount);       // getByteFrequencyData returns amplitude for each bin
-//         analyser.getByteFrequencyData(self.spectrum);
-//              // getByteTimeDomainData gets volumes over the sample time
-//              // analyser.getByteTimeDomainData(self.spectrum);
-//         vol = getRMS(self.spectrum);
-
-//       }
-      
-//       console.log("this is vol: ", vol);
-//       var input = context.createMediaStreamSource(stream);
-//       input.connect(analyser);
-//       analyser.connect(node);
-//       node.connect(context.destination);
-//     });
+      this.analyser = this.audioCtx.createAnalyser();
+      this.analyser.smoothingTimeConstant = 0.2;
+      this.analyser.fftSize = FFT_SIZE;      
+    });
   }
+    
   init () {
     return this._startCapture();
-    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
   }
   flip () {
     this.selfie = !this.selfie;
@@ -83,6 +63,8 @@ class Camera {
 let button = document.querySelector("button");
 let camera = new Camera();
 document.querySelector('.vidholder').appendChild(camera.video);
+
+console.log()
 
 button.addEventListener('click', function (e) {
   camera.init().then(start).catch(e => console.error(e));

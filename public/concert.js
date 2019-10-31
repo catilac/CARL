@@ -96,6 +96,14 @@ function render() {
     updateScene();
     needsUpdate = false;
   }
+  
+  if (camera && camera.analyzer) {
+    var bufferLength = camera.analyser.frequencyBinCount;
+    var dataArray = new Uint8Array(bufferLength);
+    camera.analyser.getByteTimeDomainData(dataArray);
+    uniforms.u_vol = dataArray[0]/128.0; 
+    console.log("dataarray", dataArray);
+  }
 
   uniforms.u_time.value += 0.05;
   
@@ -113,9 +121,9 @@ function render() {
   
   uniforms.u_camRot.value = new THREE.Vector3(rot.x, rot.y, rot.z);
   uniforms.u_camQuat.value = new THREE.Vector4(quat.x, quat.y, quat.z, quat.w);
-  uniforms.u_vol = vol || 0.0;
   
   
+   
 
   // if there is no .value here we get a strange error from three.js.min sayinf b is undefined :0
   uniforms.u_feed.value = feed;
