@@ -7,6 +7,7 @@ uniform float u_time;
 uniform vec4 u_camRot;
 uniform vec4 u_camQuat;
 uniform vec3 u_camPos;
+uniform float u_vol;
 
 uniform sampler2D u_feed;
 #define PI 3.14159265

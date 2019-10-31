@@ -25,6 +25,7 @@ class Camera {
       
       // const audioTracks = stream.getAudioTracks();
       this.audio.srcObject = stream;
+      this.audio.play();
       
     });
   }

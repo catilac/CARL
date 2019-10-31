@@ -8,6 +8,8 @@ var geometry;
 var material;
 var mesh;
 var feed;
+var analyser;
+var FFT_SIZE = 512;
 
 var socket;
 
@@ -38,6 +40,16 @@ function updateScene() {
   scene.add( mesh );
     
 }
+// from here https://hackernoon.com/creative-coding-using-the-microphone-to-make-sound-reactive-art-part1-164fd3d972f3
+// A more accurate way to get overall volume
+this.getRMS = function (spectrum) {var rms = 0;
+  for (var i = 0; i < vols.length; i++) {
+    rms += spectrum[i] * spectrum[i];
+  }
+  rms /= spectrum.length;
+  rms = Math.sqrt(rms);
+  return rms;
+ }
 
 function init() {
   
@@ -54,6 +66,19 @@ function init() {
   threeCam.position.z = 1;
   
   video = document.querySelector( 'video' );
+  
+  
+  analyser = context.createAnalyser();
+  analyser.smoothingTimeConstant = 0.2;
+  analyser.fftSize = FFT_SIZE;     
+  var node = context.createScriptProcessor(FFT_SIZE*2, 1, 1);     
+  node.onaudioprocess = function () {       // bitcount returns array which is half the FFT_SIZE
+  self.spectrum = new Uint8Array(analyser.frequencyBinCount);       // getByteFrequencyData returns amplitude for each bin
+  analyser.getByteFrequencyData(self.spectrum);
+       // getByteTimeDomainData gets volumes over the sample time
+       // analyser.getByteTimeDomainData(self.spectrum);
+  self.vol = self.getRMS(self.spectrum);
+  
   feed = new THREE.VideoTexture( video );
   
   uniforms = {
@@ -64,6 +89,7 @@ function init() {
     u_feed: {type: "", value: new THREE.VideoTexture(video)},
     u_camQuat:{type:"v4", value: new THREE.Vector4() },
     u_camPos: {type: "v3", value: new THREE.Vector3() },
+    u_vol:{type:'f', value: 0.0}
   };
   
   updateScene();
