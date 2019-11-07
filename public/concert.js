@@ -117,12 +117,9 @@ function render() {
     
     camera.analyser.getByteTimeDomainData(dataArray)
     
-    vol = getRMS(dataArray);
-    
-    // console.log("dataarray", dataArray[0]/128.0);
+    vol = getRMS(dataArray);    
   }
   
-  console.log(vol);
   uniforms.u_vol.value = vol; 
 
   uniforms.u_time.value += 0.05;

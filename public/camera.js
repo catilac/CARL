@@ -12,7 +12,7 @@ class Camera {
   constructor () {
     this.video = document.createElement('video');
     this.video.setAttribute('muted', true);
-    this.video.setAttribute('playsinline', true);
+    this.video.setAttribute('playsinline', false);
     
     this.selfie = false;
     
@@ -28,8 +28,9 @@ class Camera {
       this.video.srcObject = stream;
       this.video.play();
       
-      const audioTracks = stream.getAudioTracks();
-      
+      const tracks = stream.getAudioTracks();
+      const track = tracks[0]; // we are only getting one track FYI
+            
       var source = this.audioCtx.createMediaStreamSource(stream);
       var dest = this.audioCtx.createMediaStreamDestination();
       
@@ -53,8 +54,6 @@ class Camera {
 let button = document.querySelector("button");
 let camera = new Camera();
 document.querySelector('.vidholder').appendChild(camera.video);
-
-console.log()
 
 button.addEventListener('click', function (e) {
   camera.init().then(start).catch(e => console.error(e));
