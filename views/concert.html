@@ -64,6 +64,10 @@ function grantedDeviceMotion(funcArg) {
     funcArg,
     false
   );
+  const elem = document.getElementById('welcome-screen');
+  if (elem) {
+    elem.parentNode.removeChild(elem);
+  }
 }
     </script>
       
@@ -74,11 +78,11 @@ function grantedDeviceMotion(funcArg) {
       
        <div id="welcome-screen">
         <h1>
-          WELCOME 2 CAURL
+          WELCOME TO CARL
         </h1>
         
         <p>
-          Tap to begin (and let your browser access the camera, microphone, and orientation)
+          Please Tap to grant permission
         </p>
       </div>
        
