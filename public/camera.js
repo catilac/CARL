@@ -31,6 +31,7 @@ class Camera {
       const audioTracks = stream.getAudioTracks();
       
       var source = this.audioCtx.createMediaStreamSource(stream);
+      var dest = this.audioCtx.createMediaStreamDestination();
       
       this.analyser = this.audioCtx.createAnalyser();
       this.analyser.smoothingTimeConstant = 0.2;
