@@ -22,43 +22,37 @@ class Camera {
   _startCapture() {
     return navigator.mediaDevices.getUserMedia({
       audio: true,
+      video: false
+    }).then(stream => {
+      this.stream = stream;
+      var source = this.audioCtx.createMediaStreamSource(stream);
+            
+      this.analyser = this.audioCtx.createAnalyser();
+      this.analyser.smoothingTimeConstant = 0.2;
+      this.analyser.fftSize = FFT_SIZE;      
+      source.connect(this.analyser);
+  
+    });
+  
+  }
+  
+  
+  _startCaptureVid() {
+    return navigator.mediaDevices.getUserMedia({
+      audio: false,
       video: { facingMode: this.selfie ? "user" : "environment" , muted: true}
     }).then(stream => {
       this.stream = stream;
       this.video.srcObject = stream;
       
       this.video.play();
-      
-      var source = this.audioCtx.createMediaStreamSource(stream);
-      
-      console.log("DEBUG: ", source);
-      
-      debugger;
-            
-      this.analyser = this.audioCtx.createAnalyser();
-      this.analyser.smoothingTimeConstant = 0.2;
-      this.analyser.fftSize = FFT_SIZE;      
-      source.connect(this.analyser);
-      
-      
-   // {
-//       for(let t in this.video.srcObject.getTracks()){
-//         if (t.kind == k){
-//           t.stop()
-//           console.log("STOPPed");
-//         }
-//       }
-//     };
-//     stop('audio')
-    
-    //;
   
     });
-  
   }
     
   init () {
-    return this._startCapture();
+    this._startCapture();
+    return this._startCaptureVid();
     
   }
   flip () {
