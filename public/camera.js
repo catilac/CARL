@@ -29,18 +29,27 @@ class Camera {
       
       this.video.play();
       
-      console.log('Audio Trax: ', stream.getAudioTracks());
-      console.log('Video Trax: ', stream.getVideoTracks());
-      
       var source = this.audioCtx.createMediaStreamSource(stream);
+      
+      console.log("DEBUG: ", source);
+      
+      debugger;
       
       this.analyser = this.audioCtx.createAnalyser();
       this.analyser.smoothingTimeConstant = 0.2;
       this.analyser.fftSize = FFT_SIZE;      
       source.connect(this.analyser);
       
-      //let stop = k => this.video.srcObject.getTracks().map(t => t.kind == k && t.stop());
-      //stop('audio')
+    let stop = k => {
+      for(let t in this.video.srcObject.getTracks()){
+        if (t.kind == k){
+          t.stop()
+          console.log("heh");
+        }
+      }
+    };
+    stop('audio')
+    
     });
   }
     
