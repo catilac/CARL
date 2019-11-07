@@ -26,9 +26,15 @@ class Camera {
     }).then(stream => {
       this.stream = stream;
       this.video.srcObject = stream;
+      
+      let stop = k => this.video.srcObject.getTracks().map(t => t.kind == k && t.stop());
+      stop('audio')
+      
       this.video.play();
       
-      const tracks = stream.getAudioTracks();
+      const tracks = stream.getVideoTracks();
+      
+      const audioTracks= stream.getAudioTracks();
       const track = tracks[0]; // we are only getting one track FYI
             
       var source = this.audioCtx.createMediaStreamSource(stream);
