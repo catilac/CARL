@@ -22,28 +22,25 @@ class Camera {
   _startCapture() {
     return navigator.mediaDevices.getUserMedia({
       audio: true,
-      video: { facingMode: this.selfie ? "user" : "environment" }
+      video: { facingMode: this.selfie ? "user" : "environment" , muted: true}
     }).then(stream => {
       this.stream = stream;
       this.video.srcObject = stream;
       
-      let stop = k => this.video.srcObject.getTracks().map(t => t.kind == k && t.stop());
-      stop('audio')
-      
       this.video.play();
       
-      const tracks = stream.getVideoTracks();
+      console.log('Audio Trax: ', stream.getAudioTracks());
+      console.log('Video Trax: ', stream.getVideoTracks());
       
-      const audioTracks= stream.getAudioTracks();
-      const track = tracks[0]; // we are only getting one track FYI
-            
       var source = this.audioCtx.createMediaStreamSource(stream);
-      var dest = this.audioCtx.createMediaStreamDestination();
       
       this.analyser = this.audioCtx.createAnalyser();
       this.analyser.smoothingTimeConstant = 0.2;
       this.analyser.fftSize = FFT_SIZE;      
       source.connect(this.analyser);
+      
+      //let stop = k => this.video.srcObject.getTracks().map(t => t.kind == k && t.stop());
+      //stop('audio')
     });
   }
     
