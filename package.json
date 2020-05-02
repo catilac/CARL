@@ -1,10 +1,11 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
+  "name": "CARL",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "description": "Code Augmented Reality Live",
+  "contributors": [
+    "Char Stiles <contact@charstiles.com> (http://charstiles.com/)", 
+    "Chirag Davé <c@chirag.io> (http://chirag.io)"
+  ],
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
