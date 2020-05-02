@@ -5,6 +5,7 @@
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
+const mustacheExpress = require("mustache-express");
 
 // socket.io
 const io = require("socket.io")(server);
@@ -14,16 +15,21 @@ const listener = server.listen(process.env.PORT || 3000, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
+// Setup Templating
+app.engine('html', mustacheExpress());
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/views/concert.html");
+  response.render("concert", {isProduction: process.env.ENVIRONMENT === 'production'});
 });
 
 app.get("/editor", function(request, response) {
-  response.sendFile(__dirname + "/views/editor.html");
+  response.render("editor", {isProduction: process.env.ENVIRONMENT === 'production'});
 });
 
 app.get("/current_code_debug", function(request, response) {
