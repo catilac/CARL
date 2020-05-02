@@ -4,7 +4,7 @@
 var FFT_SIZE = 512;
 var vol;
 
-if (window.location.protocol !== 'https:') {
+if (window.isProduction && window.location.protocol !== 'https:') {
   window.location = 'https://' + window.location.hostname;
 }
 
