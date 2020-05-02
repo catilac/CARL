@@ -13,3 +13,4 @@ You can read more about CARL [here](http:/www.charstiles.com/carl).
 
 # Sponsors
 This project was sponsored in part by the Clinic for Open Source Arts (COSA) at the University of Denver.
+![COSA](https://raw.githubusercontent.com/catilac/CARL/master/cosa.png)
