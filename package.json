@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Code Augmented Reality Live",
   "contributors": [
-    "Char Stiles <contact@charstiles.com> (http://charstiles.com/)", 
+    "Char Stiles <contact@charstiles.com> (http://charstiles.com/)",
     "Chirag Davé <c@chirag.io> (http://chirag.io)"
   ],
   "main": "server.js",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "express": "^4.16.4",
+    "mustache-express": "^1.3.0",
     "socket.io": "^2.2.0"
   },
   "engines": {
