@@ -11,9 +11,5 @@ You can read more about CARL [here](http:/www.charstiles.com/carl).
 2. `node server.js`
 3. Navigate to `localhost:3000`
 
--------------------
-
-\ ゜o゜)ノ
-
-
-NOTES: To ask for permission for device orientation, it must be prompted by a user gesture
+# Sponsors
+This project was sponsored in part by the Clinic for Open Source Arts (COSA) at the University of Denver.
