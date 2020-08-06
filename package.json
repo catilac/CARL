@@ -29,6 +29,13 @@
     "express"
   ],
   "devDependencies": {
+    "husky": "^4.2.5",
+    "precise-commits": "^1.0.2",
     "prettier": "2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "precise-commits"
+    }
   }
 }
