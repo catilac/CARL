@@ -8,7 +8,8 @@
   ],
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"
   },
   "dependencies": {
     "express": "^4.16.4",
@@ -26,5 +27,8 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "2.0.5"
+  }
 }

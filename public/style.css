@@ -74,11 +74,15 @@ footer {
   display: none;
 }
 
-#container { width: 10%; height: 20%; }
+#container {
+  width: 10%;
+  height: 20%;
+}
 
 .CodeMirror {
   position: absolute !important;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   background-color: rgba(255, 255, 255, 0.35) !important;
   width: 50%;
   height: 100% !important;
